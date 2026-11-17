@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="emeraldBg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#134E3E"/>
+      <stop offset="100%" stop-color="#092920"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="20" y1="16" x2="100" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E6C987"/>
+      <stop offset="50%" stop-color="#C8A45D"/>
+      <stop offset="100%" stop-color="#9F7B38"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="32" fill="url(#emeraldBg)"/>
+  <path d="M30 88V52C30 35.4315 43.4315 22 60 22C76.5685 22 90 35.4315 90 52V88" stroke="url(#goldAccent)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M44 88V55C44 46.1634 51.1634 39 60 39C68.8366 39 76 46.1634 76 55V88" stroke="url(#goldAccent)" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M60 26V88" stroke="url(#goldAccent)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24 88H96" stroke="url(#goldAccent)" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="60" cy="54" r="4.5" fill="#E6C987"/>
+</svg>

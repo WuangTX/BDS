@@ -1,0 +1,19 @@
+{
+  "name": "BDS Studio — Quản Trị & Kiến Tạo Dự Án",
+  "short_name": "BDS Studio",
+  "description": "Ứng dụng tối ưu hóa quy trình tạo dự án BĐS, quản lý thương hiệu, tin tức và xuất bản 1-Click lên GitHub Pages không cần git push.",
+  "start_url": "./studio.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0E3A2F",
+  "theme_color": "#0E3A2F",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./assets/images/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

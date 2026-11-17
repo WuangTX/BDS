@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="28" fill="#F6F3EC"/>
+  <!-- River Curve -->
+  <path d="M0 590 C320 540, 620 650, 1200 560 L1200 720 L0 720 Z" fill="#C7E4DF"/>
+  <path d="M0 615 C340 565, 640 670, 1200 585" stroke="#8AC2B9" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="920" y="665" fill="#0E3A2F" font-family="sans-serif" font-size="20" font-weight="600" letter-spacing="2">SÔNG CẢNH QUAN SINH THÁI</text>
+
+  <!-- Park Grounds -->
+  <rect x="60" y="60" width="1080" height="480" rx="44" fill="#E5EFE9" stroke="#B7D0C4" stroke-width="2"/>
+  <path d="M120 320 C340 240, 820 410, 1080 280" stroke="#FAF8F4" stroke-width="20" stroke-linecap="round"/>
+  <path d="M600 90 C580 260, 620 390, 595 520" stroke="#FAF8F4" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Central Lagoon Pool -->
+  <ellipse cx="600" cy="305" rx="165" ry="78" fill="#8CD1CB" stroke="#FAF8F4" stroke-width="8"/>
+  <ellipse cx="600" cy="305" rx="125" ry="52" fill="#6BBDB6"/>
+  <text x="600" y="311" text-anchor="middle" fill="#083028" font-family="sans-serif" font-size="16" font-weight="700">HỒ BƠI KHOÁNG MUỐI TRÀN BỜ 1.200M²</text>
+
+  <!-- Tower A: Emerald Crown -->
+  <rect x="140" y="115" width="240" height="145" rx="26" fill="#0E3A2F" stroke="#C8A45D" stroke-width="4"/>
+  <text x="260" y="180" text-anchor="middle" fill="#FAF8F4" font-family="sans-serif" font-size="20" font-weight="700">THÁP EMERALD A</text>
+  <text x="260" y="210" text-anchor="middle" fill="#E6C987" font-family="sans-serif" font-size="14">35 Tầng • 420 Căn hộ hạng sang</text>
+
+  <!-- Tower B: Sapphire Pearl -->
+  <rect x="820" y="115" width="240" height="145" rx="26" fill="#0E3A2F" stroke="#C8A45D" stroke-width="4"/>
+  <text x="940" y="180" text-anchor="middle" fill="#FAF8F4" font-family="sans-serif" font-size="20" font-weight="700">THÁP RUBY B</text>
+  <text x="940" y="210" text-anchor="middle" fill="#E6C987" font-family="sans-serif" font-size="14">35 Tầng • Sky Villa &amp; Duplex</text>
+
+  <!-- Riverside Villas -->
+  <g fill="#FAF8F4" stroke="#0E3A2F" stroke-width="2.5">
+    <rect x="150" y="395" width="110" height="88" rx="18"/>
+    <rect x="285" y="395" width="110" height="88" rx="18"/>
+    <rect x="805" y="395" width="110" height="88" rx="18"/>
+    <rect x="940" y="395" width="110" height="88" rx="18"/>
+  </g>
+  <text x="275" y="512" text-anchor="middle" fill="#0E3A2F" font-family="sans-serif" font-size="15" font-weight="600">BIỆT THỰ VEN SÔNG (KHU TÂY)</text>
+  <text x="925" y="512" text-anchor="middle" fill="#0E3A2F" font-family="sans-serif" font-size="15" font-weight="600">BIỆT THỰ VEN SÔNG (KHU ĐÔNG)</text>
+
+  <!-- Clubhouse -->
+  <rect x="495" y="425" width="210" height="72" rx="22" fill="#C8A45D"/>
+  <text x="600" y="467" text-anchor="middle" fill="#0E3A2F" font-family="sans-serif" font-size="16" font-weight="700">CLUBHOUSE &amp; BẾN DU THUYỀN</text>
+
+  <!-- Compass & Legend -->
+  <circle cx="1090" cy="650" r="34" fill="#FAF8F4" stroke="#C8A45D" stroke-width="2"/>
+  <path d="M1090 624 L1098 656 L1090 649 L1082 656 Z" fill="#0E3A2F"/>
+  <text x="1090" y="618" text-anchor="middle" fill="#0E3A2F" font-family="sans-serif" font-size="12" font-weight="700">BẮC</text>
+
+  <rect x="60" y="615" width="430" height="68" rx="18" fill="#FAF8F4" opacity="0.95"/>
+  <text x="88" y="645" fill="#0E3A2F" font-family="sans-serif" font-size="16" font-weight="700">MẶT BẰNG TỔNG THỂ QUY HOẠCH — MẬT ĐỘ XÂY DỰNG 26.8%</text>
+  <text x="88" y="668" fill="#5A6B63" font-family="sans-serif" font-size="13">73.2% diện tích dành cho mặt nước, công viên nhiệt đới và tiện ích nội khu</text>
+</svg>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BDS Studio — Ứng Dụng Tối Ưu Tạo Dự Án &amp; Xuất Bản Lên GitHub</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/images/logo-mark.svg" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#0E3A2F" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/studio.css" />
+</head>
+<body>
+  <div class="studio-layout">
+    <!-- SIDEBAR ĐIỀU HƯỚNG -->
+    <aside class="studio-sidebar">
+      <div class="st-brand">
+        <img src="./assets/images/logo-mark.svg" alt="BDS Studio" id="sidebarLogo" />
+        <div>
+          <div class="st-brand-title">BDS Studio</div>
+          <div class="st-brand-badge">NO-PUSH PUBLISHER</div>
+        </div>
+      </div>
+
+      <nav class="st-nav" id="studioNav">
+        <button type="button" class="st-nav-btn active" data-tab="dashboard">
+          <span>📊 Tổng quan &amp; Tạo nhanh</span>
+        </button>
+        <button type="button" class="st-nav-btn" data-tab="projects">
+          <span>🏢 Dự án BĐS</span>
+          <span class="st-count-pill" id="navProjectsCount">0</span>
+        </button>
+        <button type="button" class="st-nav-btn" data-tab="brand">
+          <span>🎨 Thương hiệu &amp; Giao diện</span>
+        </button>
+        <button type="button" class="st-nav-btn" data-tab="news">
+          <span>📰 Tin tức &amp; Sự kiện</span>
+          <span class="st-count-pill" id="navNewsCount">0</span>
+        </button>
+        <button type="button" class="st-nav-btn" data-tab="preview">
+          <span>👁️ Xem trước Trực tiếp</span>
+        </button>
+        <button type="button" class="st-nav-btn" data-tab="publish">
+          <span>🚀 Kết nối &amp; Xuất bản GitHub</span>
+        </button>
+      </nav>
+
+      <div class="st-sidebar-footer">
+        <button type="button" class="st-btn st-btn-publish" id="installPwaBtn" style="display:none;width:100%;">
+          📲 Cài App BDS Studio về máy
+        </button>
+        <a href="./index.html?preview=draft" target="_blank" class="st-btn st-btn-outline" style="background:rgba(255,255,255,0.08);color:#FAF8F4;border-color:rgba(255,255,255,0.18);">
+          ↗ Mở Website (Bản xem thử)
+        </a>
+        <a href="./index.html" target="_blank" class="st-btn st-btn-outline" style="background:transparent;color:rgba(250,248,244,0.72);border-color:rgba(255,255,255,0.12);font-size:0.82rem;">
+          🌐 Mở Website Đã Xuất Bản
+        </a>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC LÀM VIỆC CHÍNH -->
+    <div class="studio-main">
+      <header class="studio-topbar">
+        <div class="status-indicator" id="draftStatusBadge">
+          <span class="status-dot" id="draftStatusDot"></span>
+          <span id="draftStatusText">Đang tải dữ liệu...</span>
+        </div>
+
+        <div class="topbar-actions">
+          <button type="button" class="st-btn st-btn-outline" id="openSmartPasteTopBtn">
+            ⚡ Dán nhanh dự án từ Zalo/Word
+          </button>
+          <button type="button" class="st-btn st-btn-primary" id="quickNewProjectTopBtn">
+            + Tạo dự án mới
+          </button>
+          <button type="button" class="st-btn st-btn-publish" id="oneClickPublishTopBtn">
+            🚀 Xuất bản lên Website
+          </button>
+        </div>
+      </header>
+
+      <main class="studio-workspace" id="studioWorkspace"></main>
+    </div>
+  </div>
+
+  <!-- MODAL 1: DÁN NHANH THÔNG TIN DỰ ÁN THÔ (SMART PARSER) -->
+  <div class="st-modal-backdrop" id="smartPasteModal">
+    <div class="st-modal">
+      <div class="st-card-header">
+        <div>
+          <h3 class="st-title">⚡ Dán Nhanh Thông Tin Dự Án (Smart Paste)</h3>
+          <p class="st-subtitle">Copy tin nhắn giới thiệu dự án từ Zalo, Word, Facebook hoặc Brochure dán vào đây — App tự động bóc tách thành trang Landing Page hoàn chỉnh!</p>
+        </div>
+      </div>
+
+      <div class="st-field">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <label>Nội dung thông tin dự án thô</label>
+          <button type="button" class="st-btn st-btn-outline st-btn-sm" id="fillSampleRawTextBtn">
+            ✨ Điền thử văn bản mẫu
+          </button>
+        </div>
+        <textarea id="smartPasteTextarea" class="st-textarea" rows="12" placeholder="Ví dụ:&#10;Tên dự án: The Riveria Quận 7&#10;Vị trí: Mặt tiền Nguyễn Lương Bằng, Quận 7&#10;Giá bán: Từ 68 triệu/m2&#10;Quy mô: 5.2 ha..."></textarea>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px;">
+        <button type="button" class="st-btn st-btn-outline" id="closeSmartPasteBtn">Hủy</button>
+        <button type="button" class="st-btn st-btn-primary" id="runSmartParseBtn">
+          ⚡ Phân tách &amp; Tạo trang dự án ngay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CHỌN MẪU KHỞI TẠO DỰ ÁN NHANH -->
+  <div class="st-modal-backdrop" id="templatePickerModal">
+    <div class="st-modal">
+      <h3 class="st-title" style="margin-bottom:6px;">🏗️ Chọn Mẫu Khung Dự Án Chuẩn BĐS</h3>
+      <p class="st-subtitle" style="margin-bottom:20px;">Hệ thống tự động điền sẵn bộ thông số kỹ thuật, tiện ích và lịch thanh toán mẫu theo đúng phân khúc để bạn chỉ cần thay tên &amp; thả ảnh vào.</p>
+
+      <div class="st-field">
+        <label>Tên dự án BĐS mới *</label>
+        <input type="text" id="newTplProjectName" class="st-input" placeholder="VD: The Emerald Symphony Quận 7" />
+      </div>
+
+      <div class="st-grid-2" id="templateCardsContainer" style="margin-top:14px;"></div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:18px;">
+        <button type="button" class="st-btn st-btn-outline" id="closeTemplatePickerBtn">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: TIẾN TRÌNH XUẤT BẢN 1-CLICK LÊN GITHUB -->
+  <div class="st-modal-backdrop" id="publishModal">
+    <div class="st-modal" style="max-width:560px;">
+      <h3 class="st-title" style="margin-bottom:6px;">🚀 Xuất Bản Lên Website (Không Cần Git Push)</h3>
+      <p class="st-subtitle" style="margin-bottom:18px;">Toàn bộ hình ảnh tối ưu WebP và dữ liệu mới sẽ được lưu thẳng lên GitHub Repository chỉ bằng 1 Commit duy nhất và tự động cập nhật GitHub Pages.</p>
+
+      <div class="st-field">
+        <label>Ghi chú phiên bản xuất bản</label>
+        <input type="text" id="publishCommitMsg" class="st-input" value="✨ Cập nhật dự án & nội dung từ BDS Studio App" />
+      </div>
+
+      <div id="publishProgressArea" style="display:none;margin:16px 0;padding:16px;border-radius:14px;background:#F4F8F6;">
+        <div style="display:flex;justify-content:space-between;font-size:0.88rem;font-weight:600;">
+          <span id="publishProgressLabel">Đang chuẩn bị...</span>
+          <span id="publishProgressPct">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="publishProgressFill"></div>
+        </div>
+        <div id="publishResultLinks" style="margin-top:10px;font-size:0.86rem;"></div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
+        <button type="button" class="st-btn st-btn-outline" id="closePublishModalBtn">Đóng</button>
+        <button type="button" class="st-btn st-btn-publish" id="confirmPublishBtn">
+          🚀 Bắt đầu Xuất bản ngay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="st-toast" id="studioToast"></div>
+
+  <script type="module" src="./assets/js/studio.js"></script>
+</body>
+</html>
