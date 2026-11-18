@@ -67,6 +67,12 @@ function syncChrome() {
     hotlineBtn.innerHTML = `${ICONS.phone}<span>${escapeHTML(brand.hotline || '0909 888 688')}</span>`;
   }
 
+  const mobileHotlineBtn = document.getElementById('mobileDrawerHotlineBtn');
+  if (mobileHotlineBtn) {
+    mobileHotlineBtn.href = `tel:${cleanPhone(brand.hotline)}`;
+    mobileHotlineBtn.innerHTML = `${ICONS.phone}<span>Gọi Hotline: ${escapeHTML(brand.hotline || '0909 888 688')}</span>`;
+  }
+
   // Render Footer
   const footerEl = document.getElementById('siteFooter');
   if (footerEl) {
@@ -945,22 +951,22 @@ function renderNewsDetailPage(slug) {
   const relatedProj = (siteData.projects || []).find((p) => p.slug === article.relatedProjectSlug) || siteData.projects?.[0];
 
   root.innerHTML = `
-    <section class="section" style="padding-top:145px;">
+    <section class="section news-detail-section">
       <div class="container" style="max-width:880px;">
         <a href="#/" class="btn btn-soft" style="margin-bottom:24px;">← Quay lại Tin tức</a>
         <div class="news-meta">${escapeHTML(article.category || 'Tin thị trường')} • ${escapeHTML(article.date || '')} • ${escapeHTML(article.readTime || '4 phút đọc')}</div>
-        <h1 class="section-title" style="font-size:clamp(2rem,3.6vw,2.85rem);margin-bottom:22px;">${escapeHTML(article.title)}</h1>
+        <h1 class="section-title" style="font-size:clamp(1.75rem,3.6vw,2.85rem);margin-bottom:22px;">${escapeHTML(article.title)}</h1>
         <img src="${escapeHTML(resolveAsset(article.image || './assets/images/hero-emerald-residences.jpg'))}" alt="${escapeHTML(article.title)}"
-             style="width:100%;max-height:480px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);margin-bottom:32px;" />
-        <div style="font-size:1.08rem;line-height:1.85;color:var(--color-ink);white-space:pre-line;background:#FFFFFF;padding:36px;border-radius:var(--radius-card);box-shadow:var(--shadow-soft);">
+             class="news-detail-hero-img" />
+        <div class="news-article-body">
           ${escapeHTML(article.content || article.excerpt || '')}
         </div>
 
         ${relatedProj ? `
-          <div style="margin-top:40px;padding:28px;border-radius:var(--radius-card);background:var(--color-surface-alt);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+          <div class="news-related-banner">
             <div>
               <span class="eyebrow" style="margin-bottom:6px;">Dự Án Tâm Điểm Liên Quan</span>
-              <h3 class="serif-heading" style="font-size:1.5rem;color:var(--color-primary);">${escapeHTML(relatedProj.name)}</h3>
+              <h3 class="serif-heading" style="font-size:1.45rem;color:var(--color-primary);">${escapeHTML(relatedProj.name)}</h3>
               <p style="margin:4px 0 0;color:var(--color-ink-muted);">${escapeHTML(relatedProj.priceDisplay)} • ${escapeHTML(relatedProj.locationShort)}</p>
             </div>
             <a href="#/du-an/${encodeURIComponent(relatedProj.slug)}" class="btn btn-primary">Xem chi tiết dự án ${ICONS.arrowRight}</a>
@@ -1109,6 +1115,11 @@ function setupGlobalEvents() {
     document.body.classList.toggle('header-hidden', hidden);
     if (hidden) {
       navLinksEl?.classList.remove('mobile-open');
+      const mBtn = document.getElementById('mobileMenuBtn');
+      if (mBtn) {
+        mBtn.textContent = '☰';
+        mBtn.setAttribute('aria-expanded', 'false');
+      }
     }
   };
 
@@ -1156,14 +1167,38 @@ function setupGlobalEvents() {
 
   window.addEventListener('hashchange', handleRoute);
 
-  document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
-    document.getElementById('navLinks')?.classList.toggle('mobile-open');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const closeMobileMenu = () => {
+    navLinksEl?.classList.remove('mobile-open');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.textContent = '☰';
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    }
+  };
+
+  mobileMenuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navLinksEl?.classList.toggle('mobile-open');
+    mobileMenuBtn.textContent = isOpen ? '✕' : '☰';
+    mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
   document.querySelectorAll('#navLinks .nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      document.getElementById('navLinks')?.classList.remove('mobile-open');
-    });
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (navLinksEl?.classList.contains('mobile-open') && !e.target.closest('.header-inner')) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+      document.getElementById('consultModal')?.classList.remove('open');
+      document.getElementById('lightboxModal')?.classList.remove('open');
+    }
   });
 
   document.getElementById('openQuickConsultBtn')?.addEventListener('click', () => {

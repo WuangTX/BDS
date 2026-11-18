@@ -564,7 +564,7 @@ function renderProjTabSpecs(body, proj) {
     <p class="st-subtitle" style="margin-bottom:16px;">Bảng thông số hiển thị trang trọng bên cạnh phần Tổng quan dự án (Chủ đầu tư, Quy mô, Mật độ, Pháp lý, Bàn giao...)</p>
     <div id="specsRowsWrap" style="display:grid;gap:10px;margin-bottom:16px;">
       ${proj.specs.map((sp, i) => `
-        <div style="display:grid;grid-template-columns:1fr 1.4fr auto;gap:10px;align-items:center;">
+        <div class="st-inline-row-3">
           <input type="text" class="st-input" data-spec-label="${i}" value="${escapeHTML(sp.label)}" placeholder="Tên thông số (VD: Chủ đầu tư)" />
           <input type="text" class="st-input" data-spec-val="${i}" value="${escapeHTML(sp.value)}" placeholder="Giá trị (VD: Hưng Lộc Phát Luxury)" />
           <button type="button" class="st-btn st-btn-danger st-btn-sm" data-del-spec="${i}">✕</button>
@@ -674,7 +674,7 @@ function renderProjTabAmenities(body, proj) {
     <div style="display:grid;gap:12px;margin-bottom:28px;">
       ${proj.amenities.map((am, idx) => `
         <div style="padding:14px;border-radius:14px;border:1px solid var(--st-border);background:#FAFBFA;">
-          <div style="display:grid;grid-template-columns:1fr 1.5fr auto;gap:10px;align-items:center;">
+          <div class="st-inline-row-3">
             <input type="text" class="st-input" data-am-title="${idx}" value="${escapeHTML(am.title)}" placeholder="Tên tiện ích" />
             <input type="text" class="st-input" data-am-desc="${idx}" value="${escapeHTML(am.desc || '')}" placeholder="Mô tả tiện ích mềm mại..." />
             <button type="button" class="st-btn st-btn-danger st-btn-sm" data-del-am="${idx}">✕</button>

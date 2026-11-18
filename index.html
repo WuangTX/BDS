@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Hưng Lộc Phát Luxury — Không Gian Sống Xanh &amp; Biểu Tượng Thịnh Vượng</title>
   <meta name="description" content="Khám phá bộ sưu tập căn hộ sinh thái hạng sang, biệt thự ven sông và tổ hợp nghỉ dưỡng biển biểu tượng." />
   <link rel="icon" type="image/svg+xml" href="./assets/images/logo-mark.svg" />
@@ -25,13 +25,18 @@
         </div>
       </a>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="Điều hướng chính">
         <a href="#/" class="nav-link" data-nav="home">Trang chủ</a>
         <a href="#/gioi-thieu" class="nav-link" data-scroll="aboutSection">Giới thiệu</a>
         <a href="#/du-an" class="nav-link" data-scroll="projectsSection">Dự án</a>
         <a href="#/gia-tri" class="nav-link" data-scroll="valuesSection">Giá trị cốt lõi</a>
         <a href="#/tin-tuc" class="nav-link" data-scroll="newsSection">Tin tức</a>
         <a href="#/lien-he" class="nav-link" data-scroll="consultSection">Liên hệ</a>
+        <div class="nav-mobile-cta">
+          <a href="tel:0909888688" class="btn btn-primary" id="mobileDrawerHotlineBtn" style="width:100%;justify-content:center;">
+            📞 Gọi Hotline Tư Vấn
+          </a>
+        </div>
       </nav>
 
       <div class="header-actions">
@@ -41,7 +46,7 @@
         <a href="tel:0909888688" class="btn btn-primary" id="headerHotlineBtn">
           <span>0909 888 688</span>
         </a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Mở menu">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Mở menu" aria-expanded="false">
           ☰
         </button>
       </div>

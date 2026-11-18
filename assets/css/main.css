@@ -40,9 +40,10 @@ body {
 h1, h2, h3, h4, .serif-heading {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.25;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
 }
 
 img {
@@ -89,15 +90,16 @@ button, input, select, textarea {
 
 .header-inner {
   pointer-events: auto;
-  width: min(1260px, calc(100% - 28px));
+  position: relative;
+  width: min(1320px, calc(100% - 32px));
   margin-inline: auto;
-  padding: 11px 18px 11px 22px;
+  padding: 10px 16px 10px 20px;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  background: rgba(250, 248, 244, 0.84);
+  gap: 12px;
+  background: rgba(250, 248, 244, 0.88);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(200, 164, 93, 0.28);
@@ -111,8 +113,8 @@ button, input, select, textarea {
 }
 
 .site-header.scrolled .header-inner {
-  background: rgba(250, 248, 244, 0.95);
-  padding-block: 9px;
+  background: rgba(250, 248, 244, 0.96);
+  padding-block: 8px;
   box-shadow: 0 18px 44px -12px rgba(14, 58, 47, 0.2);
 }
 
@@ -125,14 +127,15 @@ button, input, select, textarea {
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
+  flex-shrink: 0;
   min-width: 0;
 }
 
 .brand-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
   object-fit: cover;
   flex-shrink: 0;
   box-shadow: 0 6px 16px rgba(14, 58, 47, 0.18);
@@ -141,36 +144,42 @@ button, input, select, textarea {
 .brand-text-wrap {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .brand-title {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--color-primary);
-  line-height: 1.15;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .brand-sub {
-  font-size: 0.65rem;
-  letter-spacing: 0.16em;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .nav-link {
-  padding: 9px 16px;
+  padding: 8px 13px;
   border-radius: 999px;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-ink);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.3s var(--ease-luxury);
   cursor: pointer;
 }
@@ -180,10 +189,20 @@ button, input, select, textarea {
   color: var(--color-primary);
 }
 
+.nav-mobile-cta {
+  display: none;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-actions .btn {
+  padding: 10px 18px;
+  font-size: 0.88rem;
 }
 
 .btn {
@@ -256,19 +275,27 @@ button, input, select, textarea {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(14, 58, 47, 0.15);
+  border: 1px solid rgba(14, 58, 47, 0.16);
   background: #FFFFFF;
   color: var(--color-primary);
   align-items: center;
   justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  flex-shrink: 0;
   cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
 }
 
 /* ================= HERO CINEMATIC MỀM MẠI ================= */
 .hero-section {
   position: relative;
-  min-height: 94vh;
-  padding: 138px 0 88px;
+  min-height: 92vh;
+  padding: 132px 0 116px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -337,8 +364,8 @@ button, input, select, textarea {
 
 .hero-title {
   color: #FFFFFF;
-  font-size: clamp(2.35rem, 4.4vw, 4.05rem);
-  line-height: 1.14;
+  font-size: clamp(2.25rem, 4.2vw, 3.95rem);
+  line-height: 1.2;
   margin-bottom: 18px;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
@@ -584,6 +611,8 @@ button, input, select, textarea {
   color: var(--color-ink);
   font-size: 0.9rem;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   transition: all 0.35s var(--ease-luxury);
 }
@@ -601,7 +630,7 @@ button, input, select, textarea {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 30px;
 }
 
@@ -658,6 +687,8 @@ button, input, select, textarea {
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
   backdrop-filter: blur(12px);
   background: rgba(14, 58, 47, 0.86);
   color: #FFFFFF;
@@ -672,6 +703,8 @@ button, input, select, textarea {
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.93);
   color: var(--color-primary);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
@@ -1022,6 +1055,8 @@ body.header-hidden .project-subnav {
   font-size: 0.88rem;
   min-width: 82px;
   text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .map-frame-wrap {
@@ -1043,7 +1078,7 @@ body.header-hidden .project-subnav {
 /* Tiện ích */
 .amenities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 24px;
 }
 
@@ -1152,6 +1187,8 @@ body.header-hidden .project-subnav {
   font-size: 1.2rem;
   font-weight: 700;
   text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .loan-calculator {
@@ -1209,7 +1246,7 @@ body.header-hidden .project-subnav {
 /* Gallery */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
   gap: 20px;
 }
 
@@ -1245,7 +1282,7 @@ body.header-hidden .project-subnav {
 /* ================= TIN TỨC & ĐỐI TÁC ================= */
 .news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 28px;
 }
 
@@ -1425,25 +1462,64 @@ body.header-hidden .project-subnav {
   font-size: 0.82rem;
 }
 
+/* Trang chi tiết bài viết Tin tức */
+.news-detail-section {
+  padding-top: 140px;
+}
+
+.news-detail-hero-img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 30px;
+}
+
+.news-article-body {
+  font-size: 1.06rem;
+  line-height: 1.85;
+  color: var(--color-ink);
+  white-space: pre-line;
+  background: #FFFFFF;
+  padding: 36px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.news-related-banner {
+  margin-top: 36px;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--color-surface-alt);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 /* Floating Action Dock */
 .floating-dock {
   position: fixed;
-  right: 22px;
-  bottom: 24px;
+  right: 18px;
+  bottom: 18px;
   z-index: 85;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .dock-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: 0.83rem;
+  white-space: nowrap;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
   transition: transform 0.3s var(--ease-luxury);
   border: none;
@@ -1523,8 +1599,94 @@ body.header-hidden .project-subnav {
   transform: translateY(0);
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= RESPONSIVE ĐA THIẾT BỊ (LAPTOP / TABLET / MOBILE) ================= */
+
+/* 1. Laptop nhỏ / Windows phóng to 125% (1025px – 1180px): Giữ 1 hàng ngang gọn gàng, không rớt dòng */
+@media (max-width: 1180px) {
+  .header-inner {
+    padding: 9px 14px 9px 16px;
+    gap: 8px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .brand-title {
+    font-size: 1.04rem;
+  }
+  .nav-links {
+    gap: 2px;
+  }
+  .nav-link {
+    padding: 7px 10px;
+    font-size: 0.84rem;
+  }
+  .header-actions .btn {
+    padding: 9px 14px;
+    font-size: 0.83rem;
+  }
+  .hero-content-wrap {
+    gap: 28px;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+/* 2. Máy tính bảng iPad ngang & dọc (<= 1024px) */
 @media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: rgba(250, 248, 244, 0.98);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    padding: 16px;
+    border-radius: 26px;
+    box-shadow: 0 26px 56px rgba(10, 34, 28, 0.24);
+    border: 1px solid rgba(200, 164, 93, 0.35);
+    animation: mobileMenuFade 0.24s var(--ease-luxury);
+  }
+  @keyframes mobileMenuFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .nav-links.mobile-open .nav-link {
+    padding: 12px 16px;
+    font-size: 0.96rem;
+    border-radius: 14px;
+  }
+  .nav-links.mobile-open .nav-mobile-cta {
+    display: block;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(14, 58, 47, 0.1);
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+  .brand-sub {
+    display: block;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding: 118px 0 72px;
+    border-bottom-left-radius: 42px;
+    border-bottom-right-radius: 42px;
+  }
   .hero-content-wrap,
   .about-grid,
   .overview-split,
@@ -1532,58 +1694,363 @@ body.header-hidden .project-subnav {
   .finance-grid,
   .consult-banner {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
-  .values-grid {
+  .finder-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .arch-showcase {
+    max-width: 620px;
+    margin-inline: auto;
+    width: 100%;
   }
-  .project-keybar {
-    grid-template-columns: repeat(2, 1fr);
+  .arch-main-img {
+    height: 430px;
+    border-radius: 200px 200px 32px 32px;
   }
   .arch-floating-badge {
     right: 16px;
+    bottom: 20px;
+  }
+  .projects-grid,
+  .news-grid,
+  .amenities-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .project-keybar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .consult-banner {
+    padding: 40px 32px;
+  }
+  .section {
+    padding: 76px 0;
   }
 }
 
+/* 3. Điện thoại di động (<= 768px) */
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
+  .container {
+    width: calc(100% - 28px);
   }
-  .nav-links.mobile-open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 74px;
-    left: 14px;
-    right: 14px;
-    background: #FAF8F4;
-    padding: 18px;
-    border-radius: 26px;
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(200, 164, 93, 0.3);
+  .site-header {
+    top: 10px;
   }
-  .mobile-menu-btn {
-    display: inline-flex;
+  .header-inner {
+    width: calc(100% - 20px);
+    padding: 8px 10px 8px 14px;
+    gap: 8px;
+  }
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+  }
+  .brand-title {
+    font-size: 0.98rem;
+  }
+  .brand-sub {
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
   }
   .header-actions .btn-primary {
     display: none;
   }
-  .projects-grid,
-  .values-grid,
-  .footer-grid,
-  .stats-grid {
+  .header-actions .btn-gold {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .mobile-menu-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.05rem;
+  }
+
+  /* Hero trên điện thoại */
+  .hero-section {
+    padding: 96px 0 42px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  .hero-content-wrap {
+    width: calc(100% - 28px);
+    gap: 24px;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    padding: 6px 12px;
+    margin-bottom: 14px;
+    max-width: 100%;
+  }
+  .hero-title {
+    font-size: clamp(1.78rem, 6.8vw, 2.35rem);
+    margin-bottom: 14px;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .hero-metric-pill {
+    font-size: 0.83rem;
+    padding: 8px 14px;
+    margin-bottom: 20px;
+  }
+  .hero-finder-card {
+    padding: 20px 18px;
+    border-radius: 24px;
+  }
+  .finder-grid {
     grid-template-columns: 1fr;
   }
-  .consult-banner {
-    padding: 30px 22px;
+  /* Cỡ chữ 16px ngăn Safari trên iPhone tự động zoom khi chạm vào ô nhập */
+  .finder-select,
+  .finder-input,
+  .form-input {
+    font-size: 16px;
   }
-  .hero-section {
-    border-bottom-left-radius: 34px;
-    border-bottom-right-radius: 34px;
+
+  /* Section & Bố cục thẻ trên điện thoại */
+  .section {
+    padding: 56px 0;
   }
+  .section-alt {
+    border-radius: 30px;
+  }
+  .section-header {
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-size: clamp(1.62rem, 6vw, 2.15rem);
+  }
+  .section-desc {
+    font-size: 0.95rem;
+  }
+
+  /* Thanh lọc cuộn ngang mượt bằng ngón tay trên điện thoại */
+  .filter-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-pill {
+    padding: 9px 18px;
+    font-size: 0.85rem;
+  }
+
+  .projects-grid,
+  .values-grid,
+  .news-grid,
+  .amenities-grid,
+  .gallery-grid,
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 18px 16px;
+  }
+  .stat-value {
+    font-size: 1.75rem;
+  }
+  .partners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
   .arch-main-img {
-    height: 380px;
+    height: 330px;
+    border-radius: 150px 150px 26px 26px;
+    border-width: 4px;
+  }
+  .arch-floating-badge {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: -34px 14px 0 auto;
+    padding: 16px 20px;
+    max-width: 220px;
+  }
+
+  .project-card-media {
+    height: 225px;
+  }
+  .project-card-body {
+    padding: 20px;
+  }
+  .project-card-title {
+    font-size: 1.28rem;
+  }
+
+  /* Trang chi tiết dự án trên điện thoại */
+  .project-hero {
+    min-height: auto;
+    padding: 100px 0 36px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+  .project-keybar {
+    padding: 16px;
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .keybar-item strong {
+    font-size: 1rem;
+  }
+  .project-subnav {
+    top: 68px;
+    margin-top: -18px;
+  }
+  .project-subnav-inner {
+    justify-content: flex-start;
+    border-radius: 20px;
+    padding: 8px 10px;
+    scrollbar-width: none;
+  }
+  .project-subnav-inner::-webkit-scrollbar {
+    display: none;
+  }
+  .subnav-pill {
+    padding: 7px 14px;
+    font-size: 0.83rem;
+  }
+  .specs-card,
+  .floorplan-box,
+  .loan-calculator,
+  .consult-form-card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+  .specs-row {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+  .specs-row strong {
+    text-align: left;
+  }
+  .floorplan-stage {
+    padding: 12px;
+  }
+  .zoom-hint {
+    position: static;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  .map-frame-wrap,
+  .map-frame-wrap iframe {
+    min-height: 280px;
+  }
+  .consult-banner {
+    padding: 28px 20px;
+    border-radius: 28px;
+  }
+
+  /* Trang bài viết Tin tức trên điện thoại */
+  .news-detail-section {
+    padding-top: 104px;
+  }
+  .news-article-body {
+    padding: 22px 18px;
+    font-size: 0.98rem;
+  }
+  .news-related-banner {
+    padding: 20px 18px;
+  }
+  .news-related-banner .btn {
+    width: 100%;
+  }
+
+  /* Modal trên điện thoại */
+  .modal-backdrop {
+    padding: 12px;
+  }
+  .modal-panel {
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+
+  /* Thanh công cụ nổi chuyển thành Thanh Dock Cố Định Đáy Màn Hình chuẩn Mobile BĐS */
+  .floating-dock {
+    left: 12px;
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    flex-direction: row;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(9, 36, 29, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 164, 93, 0.35);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+  .dock-btn {
+    flex: 1;
+    padding: 11px 10px;
+    font-size: 0.81rem;
+    box-shadow: none;
+  }
+  .dock-btn:hover {
+    transform: none;
+  }
+
+  .site-footer {
+    padding: 54px 0 calc(96px + env(safe-area-inset-bottom));
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+  }
+}
+
+/* 4. Điện thoại cỡ nhỏ (<= 480px) */
+@media (max-width: 480px) {
+  .brand-sub {
+    display: none;
+  }
+  .hero-cta-row .btn {
+    width: 100%;
+  }
+  .connection-item,
+  .milestone-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .loan-result-box {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* 5. Màn hình siêu nhỏ (<= 360px) */
+@media (max-width: 360px) {
+  .header-actions .btn-gold {
+    padding: 7px 10px;
+    font-size: 0.75rem;
+  }
+  .brand-title {
+    font-size: 0.88rem;
+  }
+  .stats-grid,
+  .project-keybar,
+  .partners-grid {
+    grid-template-columns: 1fr;
   }
 }
