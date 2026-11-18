@@ -83,10 +83,12 @@ button, input, select, textarea {
   left: 0;
   right: 0;
   z-index: 90;
-  transition: transform 0.45s var(--ease-luxury), top 0.45s var(--ease-luxury);
+  pointer-events: none;
+  transition: transform 0.42s var(--ease-luxury), top 0.42s var(--ease-luxury);
 }
 
 .header-inner {
+  pointer-events: auto;
   width: min(1260px, calc(100% - 28px));
   margin-inline: auto;
   padding: 11px 18px 11px 22px;
@@ -100,13 +102,24 @@ button, input, select, textarea {
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(200, 164, 93, 0.28);
   box-shadow: 0 14px 40px -12px rgba(14, 58, 47, 0.14);
-  transition: all 0.4s var(--ease-luxury);
+  transition:
+    transform 0.42s var(--ease-luxury),
+    opacity 0.32s var(--ease-luxury),
+    background 0.4s var(--ease-luxury),
+    padding 0.4s var(--ease-luxury),
+    box-shadow 0.4s var(--ease-luxury);
 }
 
 .site-header.scrolled .header-inner {
   background: rgba(250, 248, 244, 0.95);
   padding-block: 9px;
   box-shadow: 0 18px 44px -12px rgba(14, 58, 47, 0.2);
+}
+
+.site-header.header-hidden .header-inner {
+  transform: translateY(calc(-100% - 28px));
+  opacity: 0;
+  pointer-events: none;
 }
 
 .brand-link {
@@ -864,6 +877,11 @@ button, input, select, textarea {
   z-index: 60;
   margin-top: -26px;
   margin-bottom: 24px;
+  transition: top 0.42s var(--ease-luxury);
+}
+
+body.header-hidden .project-subnav {
+  top: 16px;
 }
 
 .project-subnav-inner {

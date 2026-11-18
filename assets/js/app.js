@@ -1095,9 +1095,66 @@ function setupScrollReveal() {
 }
 
 function setupGlobalEvents() {
+  const headerEl = document.getElementById('siteHeader');
+  const navLinksEl = document.getElementById('navLinks');
+  const HIDE_OFFSET = 72;
+  const DELTA_HIDE = 10;
+  const DELTA_SHOW = 8;
+
+  let lastScrollY = Math.max(0, window.scrollY);
+  let downDistance = 0;
+  let upDistance = 0;
+  let scrollTicking = false;
+
+  const setHeaderHidden = (hidden) => {
+    headerEl?.classList.toggle('header-hidden', hidden);
+    document.body.classList.toggle('header-hidden', hidden);
+    if (hidden) {
+      navLinksEl?.classList.remove('mobile-open');
+    }
+  };
+
+  const updateHeaderOnScroll = () => {
+    scrollTicking = false;
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const currentY = maxScroll > 0
+      ? Math.min(Math.max(0, window.scrollY), maxScroll)
+      : Math.max(0, window.scrollY);
+    const diff = currentY - lastScrollY;
+    lastScrollY = currentY;
+
+    headerEl?.classList.toggle('scrolled', currentY > 36);
+
+    if (currentY <= HIDE_OFFSET) {
+      setHeaderHidden(false);
+      downDistance = 0;
+      upDistance = 0;
+      return;
+    }
+
+    if (diff > 0) {
+      downDistance += diff;
+      upDistance = 0;
+      if (downDistance >= DELTA_HIDE) {
+        setHeaderHidden(true);
+      }
+    } else if (diff < 0) {
+      upDistance += -diff;
+      downDistance = 0;
+      if (upDistance >= DELTA_SHOW) {
+        setHeaderHidden(false);
+      }
+    }
+  };
+
   window.addEventListener('scroll', () => {
-    document.getElementById('siteHeader')?.classList.toggle('scrolled', window.scrollY > 36);
-  });
+    if (!scrollTicking) {
+      scrollTicking = true;
+      window.requestAnimationFrame(updateHeaderOnScroll);
+    }
+  }, { passive: true });
+
+  headerEl?.addEventListener('focusin', () => setHeaderHidden(false));
 
   window.addEventListener('hashchange', handleRoute);
 
