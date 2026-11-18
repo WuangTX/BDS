@@ -27,6 +27,11 @@ jobs:
       - name: Cấu hình GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Gắn mã phiên bản chống lưu Cache cũ cho CSS & JS
+        run: |
+          SHORT_SHA="${GITHUB_SHA:0:8}"
+          sed -i -E "s/(main\.css|studio\.css|app\.js|studio\.js)(\?v=[a-zA-Z0-9._-]+)?/\1?v=${SHORT_SHA}/g" index.html studio.html
+
       - name: Đóng gói toàn bộ Website & BDS Studio App
         uses: actions/upload-pages-artifact@v3
         with:

@@ -9,7 +9,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/main.css?v=20261118-4" />
+  <style>
+    /* Khóa cứng chống gãy chữ dọc trên Header ngay cả khi trình duyệt còn giữ cache cũ */
+    .site-header .brand-link,
+    .site-header .nav-links,
+    .site-header .nav-link,
+    .site-header .header-actions { flex-shrink: 0; }
+    .site-header .brand-title,
+    .site-header .brand-sub,
+    .site-header .nav-link,
+    .site-header .btn { white-space: nowrap; }
+    .nav-mobile-cta { display: none; }
+  </style>
 </head>
 <body>
   <div class="ambient-canvas"></div>
@@ -32,7 +44,7 @@
         <a href="#/gia-tri" class="nav-link" data-scroll="valuesSection">Giá trị cốt lõi</a>
         <a href="#/tin-tuc" class="nav-link" data-scroll="newsSection">Tin tức</a>
         <a href="#/lien-he" class="nav-link" data-scroll="consultSection">Liên hệ</a>
-        <div class="nav-mobile-cta">
+        <div class="nav-mobile-cta" hidden>
           <a href="tel:0909888688" class="btn btn-primary" id="mobileDrawerHotlineBtn" style="width:100%;justify-content:center;">
             📞 Gọi Hotline Tư Vấn
           </a>
@@ -100,6 +112,6 @@
     </div>
   </div>
 
-  <script type="module" src="./assets/js/app.js"></script>
+  <script type="module" src="./assets/js/app.js?v=20261118-4"></script>
 </body>
 </html>
