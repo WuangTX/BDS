@@ -1,8 +1,17 @@
+import {
+  getActiveSession,
+  getNonSensitiveRepoMeta,
+  scrubLegacyPlaintextToken,
+  updateActiveConfigAndVault
+} from './auth.js';
+
 const DRAFT_STORAGE_KEY = 'bds_studio_draft_v1';
-const GITHUB_CONFIG_KEY = 'bds_studio_github_config_v1';
 const LEADS_LOCAL_KEY = 'bds_captured_leads_v1';
 const IDB_NAME = 'bds_studio_uploads_db';
 const IDB_STORE = 'pending_uploads';
+
+// Xóa bỏ token lưu dạng chữ trần nếu còn từ bản cũ
+scrubLegacyPlaintextToken();
 
 // Mở IndexedDB lưu trữ các file ảnh WebP chờ đẩy lên GitHub (tránh giới hạn 5MB của localStorage)
 function openUploadsDB() {
@@ -118,26 +127,28 @@ export function clearStudioDraft() {
   localStorage.removeItem(DRAFT_STORAGE_KEY);
 }
 
-// Cấu hình kết nối GitHub lưu riêng trên trình duyệt người quản trị
+// Cấu hình kết nối GitHub lấy từ phiên đã mở khóa AES-256 (không bao giờ lưu token chữ trần trong localStorage)
 export function getGitHubConfig() {
-  try {
-    const raw = localStorage.getItem(GITHUB_CONFIG_KEY);
-    if (!raw) {
-      return { owner: '', repo: '', branch: 'main', token: '' };
-    }
-    return { branch: 'main', ...JSON.parse(raw) };
-  } catch {
-    return { owner: '', repo: '', branch: 'main', token: '' };
+  const session = getActiveSession();
+  if (session) {
+    return {
+      owner: session.owner || '',
+      repo: session.repo || '',
+      branch: session.branch || 'main',
+      token: session.token || ''
+    };
   }
+  const meta = getNonSensitiveRepoMeta();
+  return {
+    owner: meta.owner || '',
+    repo: meta.repo || '',
+    branch: meta.branch || 'main',
+    token: ''
+  };
 }
 
 export function saveGitHubConfig(cfg) {
-  localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify({
-    owner: (cfg.owner || '').trim(),
-    repo: (cfg.repo || '').trim(),
-    branch: (cfg.branch || 'main').trim() || 'main',
-    token: (cfg.token || '').trim()
-  }));
+  return updateActiveConfigAndVault(cfg);
 }
 
 // Lưu khách hàng đăng ký tư vấn dự phòng cục bộ + gửi Webhook nếu có

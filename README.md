@@ -33,4 +33,6 @@ Nhấp đúp chuột vào file **`Chay-Thu-Tren-May.bat`** (hoặc chạy `pytho
 4. Sau khoảng 20–30 giây, Website của bạn sẽ hoạt động tại:
    - Website chính thức: `https://<username>.github.io/<ten-repo>/`
    - App BDS Studio: `https://<username>.github.io/<ten-repo>/studio.html`
-5. Mở **BDS Studio → Kết nối & Xuất bản GitHub**, nhập `Username`, `Tên Repo`, và `Fine-grained Personal Access Token` (quyền `Contents: Read and write`). Từ lúc này trở đi, bạn tạo dự án ở bất kỳ đâu và chỉ cần bấm nút **"🚀 Xuất bản lên Website"**!
+5. Mở **BDS Studio (`studio.html`)**:
+   - **Lần đầu tiên đăng nhập:** Nhập `GitHub Username`, `Tên Repo`, `Fine-grained Personal Access Token` (quyền `Contents: Read and write`) và **Đặt mật khẩu mở khóa nhanh**. Hệ thống kiểm tra quyền chủ sở hữu trên GitHub và mã hóa Token bằng **AES-256-GCM** ngay trên trình duyệt.
+   - **Từ các lần sau:** Chỉ cần nhập **Mật khẩu mở khóa ngắn** của bạn là vào thẳng BDS Studio và bấm nút **"🚀 Xuất bản lên Website"** (người lạ dù biết đường dẫn `studio.html` cũng bị chặn ngay tại cổng đăng nhập)!

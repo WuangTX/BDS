@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>BDS Studio — Ứng Dụng Tối Ưu Tạo Dự Án &amp; Xuất Bản Lên GitHub</title>
   <link rel="icon" type="image/svg+xml" href="./assets/images/logo-mark.svg" />
   <link rel="manifest" href="./manifest.webmanifest" />
@@ -12,7 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/studio.css" />
 </head>
-<body>
+<body class="studio-locked">
+  <!-- CỔNG XÁC THỰC & KHÓA BẢO MẬT QUẢN TRỊ (AES-256 + GITHUB AUTH) -->
+  <div class="auth-gate" id="studioAuthGate" aria-live="polite"></div>
+
   <div class="studio-layout">
     <!-- SIDEBAR ĐIỀU HƯỚNG -->
     <aside class="studio-sidebar">
@@ -57,15 +61,23 @@
         <a href="./index.html" target="_blank" class="st-btn st-btn-outline" style="background:transparent;color:rgba(250,248,244,0.72);border-color:rgba(255,255,255,0.12);font-size:0.82rem;">
           🌐 Mở Website Đã Xuất Bản
         </a>
+        <button type="button" class="st-btn st-btn-outline" id="lockStudioSidebarBtn" style="background:rgba(197,57,57,0.16);color:#FFD6D6;border-color:rgba(255,180,180,0.22);font-size:0.82rem;">
+          🔒 Khóa &amp; Đăng xuất Studio
+        </button>
       </div>
     </aside>
 
     <!-- KHU VỰC LÀM VIỆC CHÍNH -->
     <div class="studio-main">
       <header class="studio-topbar">
-        <div class="status-indicator" id="draftStatusBadge">
-          <span class="status-dot" id="draftStatusDot"></span>
-          <span id="draftStatusText">Đang tải dữ liệu...</span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div class="status-indicator" id="draftStatusBadge">
+            <span class="status-dot" id="draftStatusDot"></span>
+            <span id="draftStatusText">Đang tải dữ liệu...</span>
+          </div>
+          <div class="admin-session-pill" id="adminSessionPill" title="Phiên quản trị đang mở khóa bảo mật">
+            <span id="adminSessionBadgeText">🛡️ Quản trị viên</span>
+          </div>
         </div>
 
         <div class="topbar-actions">
@@ -77,6 +89,9 @@
           </button>
           <button type="button" class="st-btn st-btn-publish" id="oneClickPublishTopBtn">
             🚀 Xuất bản lên Website
+          </button>
+          <button type="button" class="st-btn st-btn-outline st-btn-lock" id="lockStudioTopBtn" title="Khóa màn hình quản trị ngay lập tức">
+            🔒 Khóa
           </button>
         </div>
       </header>

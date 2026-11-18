@@ -46,16 +46,51 @@ function decodeBase64UTF8(base64Str) {
  * Kiểm tra quyền kết nối tới Repository và lấy đường dẫn GitHub Pages hiện tại
  */
 export async function verifyGitHubConnection({ owner, repo, branch = 'main', token }) {
-  if (!owner || !repo || !token) {
+  const cleanOwner = (owner || '').trim();
+  const cleanRepo = (repo || '').trim();
+  const cleanToken = (token || '').trim();
+
+  if (!cleanOwner || !cleanRepo || !cleanToken) {
     throw new Error('Vui lòng nhập đầy đủ GitHub Username, Tên Repository và Personal Access Token.');
   }
 
-  const repoInfo = await ghFetch(`/repos/${owner}/${repo}`, token);
-  let pagesUrl = `https://${owner}.github.io/${repo}/`;
+  let authUser;
+  try {
+    authUser = await ghFetch('/user', cleanToken);
+  } catch (err) {
+    if (err.message.includes('401')) {
+      throw new Error('Mã GitHub Personal Access Token không hợp lệ hoặc đã hết hạn.');
+    }
+    throw err;
+  }
+
+  let repoInfo;
+  try {
+    repoInfo = await ghFetch(`/repos/${encodeURIComponent(cleanOwner)}/${encodeURIComponent(cleanRepo)}`, cleanToken);
+  } catch (err) {
+    if (err.message.includes('404')) {
+      throw new Error(`Không tìm thấy kho lưu trữ "${cleanOwner}/${cleanRepo}" hoặc Token chưa được cấp quyền cho Repo này.`);
+    }
+    throw err;
+  }
+
+  const canPush = Boolean(
+    repoInfo.permissions?.push ||
+    repoInfo.permissions?.admin ||
+    repoInfo.permissions?.maintain
+  );
+
+  if (!canPush) {
+    throw new Error(
+      `Từ chối truy cập: Tài khoản GitHub @${authUser.login} không có quyền Quản trị / Ghi (Write) trên kho lưu trữ ${repoInfo.full_name}.`
+    );
+  }
+
+  let pagesUrl = `https://${cleanOwner}.github.io/${cleanRepo}/`;
   let pagesEnabled = false;
 
   try {
-    const pagesInfo = await ghFetch(`/repos/${owner}/${repo}/pages`, token);
+    const pagesInfo = await ghFetch(`/repos/${encodeURIComponent(cleanOwner)}/${encodeURIComponent(cleanRepo)}/pages`, cleanToken);
     if (pagesInfo?.html_url) {
       pagesUrl = pagesInfo.html_url;
       pagesEnabled = true;
@@ -65,14 +100,20 @@ export async function verifyGitHubConnection({ owner, repo, branch = 'main', tok
   }
 
   // Kiểm tra nhánh tồn tại
-  const targetBranch = branch || repoInfo.default_branch || 'main';
-  await ghFetch(`/repos/${owner}/${repo}/git/ref/heads/${targetBranch}`, token);
+  const targetBranch = (branch || '').trim() || repoInfo.default_branch || 'main';
+  await ghFetch(
+    `/repos/${encodeURIComponent(cleanOwner)}/${encodeURIComponent(cleanRepo)}/git/ref/heads/${encodeURIComponent(targetBranch)}`,
+    cleanToken
+  );
 
   return {
     fullName: repoInfo.full_name,
     private: repoInfo.private,
     defaultBranch: repoInfo.default_branch,
-    canPush: Boolean(repoInfo.permissions?.push || repoInfo.permissions?.admin || true),
+    branch: targetBranch,
+    canPush,
+    adminLogin: authUser.login,
+    adminAvatar: authUser.avatar_url || '',
     pagesUrl,
     pagesEnabled
   };
@@ -183,6 +224,8 @@ export async function publishToGitHub({
     ...siteData,
     meta: {
       ...(siteData.meta || {}),
+      repoOwner: owner.trim(),
+      repoName: repo.trim(),
       updatedAt: new Date().toISOString(),
       version: Number(siteData.meta?.version || 1) + 1
     }

@@ -99,7 +99,7 @@ function syncChrome() {
               <li><a href="#/">Trang chủ thương hiệu</a></li>
               <li><a href="#/du-an" data-scroll="projectsSection">Danh mục dự án mở bán</a></li>
               <li><a href="#/tin-tuc" data-scroll="newsSection">Tin tức &amp; Phân tích thị trường</a></li>
-              <li><a href="./studio.html">Ứng dụng Quản trị BDS Studio</a></li>
+              <li><a href="#/lien-he" data-scroll="consultSection">Đăng ký nhận bảng giá &amp; tư vấn</a></li>
             </ul>
           </div>
 
@@ -115,9 +115,7 @@ function syncChrome() {
 
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} ${escapeHTML(brand.name)}. Kiến tạo không gian sống chuẩn mực &amp; bền vững.</span>
-          <a href="./studio.html" class="studio-shortcut" title="Mở App quản trị dự án không cần git push">
-            ✦ Mở App Quản Trị BDS Studio
-          </a>
+          <span style="opacity:0.75;">Tư vấn chuyên sâu 1:1 • Bảo mật thông tin khách hàng</span>
         </div>
       </div>
     `;

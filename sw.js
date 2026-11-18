@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bds-studio-shell-v1';
+const CACHE_NAME = 'bds-studio-shell-v2';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();

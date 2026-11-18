@@ -22,8 +22,24 @@ import {
   pullSiteDataFromGitHub,
   verifyGitHubConnection
 } from './github-sync.js';
+import {
+  changeVaultPassword,
+  detectHostedRepoBinding,
+  getActiveSession,
+  getLockoutStatus,
+  getVaultMeta,
+  hasSavedVault,
+  isLocalDevEnvironment,
+  lockStudioSession,
+  loginLocalDevMode,
+  resetSavedVault,
+  setupAdminVaultAndLogin,
+  touchActiveSession,
+  unlockWithPassword
+} from './auth.js';
 
 let siteData = null;
+let publishedMetaSource = null;
 let pendingUploads = [];
 let resolveAsset = (u) => u || '';
 let currentTab = 'dashboard';
@@ -33,6 +49,9 @@ let editingNewsId = null;
 let previewDevice = 'desktop';
 let previewRoute = '#/';
 let deferredPwaPrompt = null;
+let globalEventsBound = false;
+let inactivityWatchTimer = null;
+let lockoutCountdownTimer = null;
 
 function escapeHTML(str = '') {
   return String(str)
@@ -1538,6 +1557,50 @@ function renderPublishWorkspace(ws) {
         </div>
       </div>
     </div>
+
+    <div class="st-card">
+      <div class="st-card-header">
+        <div>
+          <h3 class="st-title" style="font-size:1.18rem;">🔐 Bảo Mật Đăng Nhập &amp; Khóa Mã Hóa AES-256</h3>
+          <p class="st-subtitle">
+            ${hasSavedVault()
+              ? 'Mã GitHub Token đang được mã hóa chuẩn <strong>AES-256-GCM</strong> bằng mật khẩu riêng của bạn và tự động khóa sau 30 phút không thao tác.'
+              : 'Bạn đang ở chế độ Nội bộ. Hãy đặt mật khẩu bên dưới để mã hóa và lưu khóa kết nối GitHub an toàn trên thiết bị này.'}
+          </p>
+        </div>
+        <button type="button" class="st-btn st-btn-outline st-btn-lock st-btn-sm" id="lockFromSecurityCardBtn">
+          🔒 Khóa màn hình ngay
+        </button>
+      </div>
+
+      ${hasSavedVault() ? `
+        <div class="st-grid-3" style="align-items:end;">
+          <div class="st-field" style="margin-bottom:0;">
+            <label>Mật khẩu mở khóa hiện tại *</label>
+            <input type="password" id="secCurrentPass" class="st-input" placeholder="Nhập mật khẩu hiện tại..." />
+          </div>
+          <div class="st-field" style="margin-bottom:0;">
+            <label>Mật khẩu mở khóa mới *</label>
+            <input type="password" id="secNewPass" class="st-input" placeholder="Tối thiểu 4 ký tự..." />
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="st-btn st-btn-primary" id="changeStudioPassBtn">🔑 Đổi mật khẩu</button>
+            <button type="button" class="st-btn st-btn-danger" id="wipeSavedVaultBtn" title="Dùng khi đăng nhập nhờ trên máy người khác">🗑️ Xóa khóa trên máy này</button>
+          </div>
+        </div>
+      ` : `
+        <div class="st-grid-2" style="align-items:end;">
+          <div class="st-field" style="margin-bottom:0;">
+            <label>Đặt Mật khẩu mở khóa nhanh cho thiết bị này *</label>
+            <input type="password" id="secInitialPass" class="st-input" placeholder="Tối thiểu 4 ký tự (dùng để mở khóa từ lần sau)..." />
+          </div>
+          <div>
+            <button type="button" class="st-btn st-btn-primary" id="sealInitialVaultBtn">🛡️ Xác thực GitHub &amp; Bật khóa mật khẩu</button>
+          </div>
+        </div>
+      `}
+      <div id="secActionResult" style="display:none;margin-top:14px;padding:12px 14px;border-radius:12px;font-size:0.88rem;"></div>
+    </div>
   `;
 
   const readCfgInputs = () => {
@@ -1563,16 +1626,76 @@ function renderPublishWorkspace(ws) {
   document.getElementById('saveAndVerifyGhBtn')?.addEventListener('click', async () => {
     try {
       const next = readCfgInputs();
-      showResult('⏳ Đang kiểm tra kết nối tới kho lưu trữ GitHub...');
+      showResult('⏳ Đang kiểm tra quyền Quản trị viên trên kho lưu trữ GitHub...');
       const info = await verifyGitHubConnection(next);
+      await saveGitHubConfig({
+        ...next,
+        branch: info.branch || next.branch,
+        adminLogin: info.adminLogin,
+        adminAvatar: info.adminAvatar
+      });
+      syncAdminSessionBadge();
       showResult(`
-        <strong>✓ Kết nối thành công tới <code>${escapeHTML(info.fullName)}</code>!</strong><br/>
+        <strong>✓ Xác thực quyền Quản trị thành công cho <code>@${escapeHTML(info.adminLogin)}</code> trên <code>${escapeHTML(info.fullName)}</code>!</strong><br/>
         • Địa chỉ Website GitHub Pages: <a href="${escapeHTML(info.pagesUrl)}" target="_blank" style="font-weight:700;color:var(--st-primary);">${escapeHTML(info.pagesUrl)}</a>
         ${info.pagesEnabled ? '(Đã kích hoạt)' : '(Chưa bật — hãy bấm nút "Tự động bật GitHub Pages" kế bên)'}<br/>
-        • App quản trị trực tuyến sau khi deploy: <code>${escapeHTML(info.pagesUrl)}studio.html</code>
+        • Cổng quản trị bảo mật trực tuyến: <code>${escapeHTML(info.pagesUrl)}studio.html</code>
       `);
     } catch (err) {
       showResult(`✕ Không thể kết nối: ${escapeHTML(err.message)}`, true);
+    }
+  });
+
+  const secBox = document.getElementById('secActionResult');
+  const showSecMsg = (msg, isErr = false) => {
+    if (!secBox) return;
+    secBox.style.display = 'block';
+    secBox.style.background = isErr ? '#FDF2F2' : '#EDF5F1';
+    secBox.style.color = isErr ? '#A62626' : '#0E3A2F';
+    secBox.innerHTML = msg;
+  };
+
+  document.getElementById('lockFromSecurityCardBtn')?.addEventListener('click', () => {
+    lockAndShowGate('🔒 Đã khóa màn hình quản trị BDS Studio an toàn.');
+  });
+
+  document.getElementById('changeStudioPassBtn')?.addEventListener('click', async () => {
+    try {
+      const currentPassword = document.getElementById('secCurrentPass')?.value || '';
+      const newPassword = document.getElementById('secNewPass')?.value || '';
+      await changeVaultPassword({ currentPassword, newPassword });
+      document.getElementById('secCurrentPass').value = '';
+      document.getElementById('secNewPass').value = '';
+      showSecMsg('✓ Đã cập nhật mật khẩu mở khóa và mã hóa lại khóa AES-256 thành công!');
+      showToast('Đã đổi mật khẩu mở khóa Studio!');
+    } catch (err) {
+      showSecMsg(`✕ ${escapeHTML(err.message)}`, true);
+    }
+  });
+
+  document.getElementById('wipeSavedVaultBtn')?.addEventListener('click', () => {
+    if (!confirm('Xóa toàn bộ khóa kết nối đã lưu trên trình duyệt này và đăng xuất ngay? (Hãy dùng khi bạn đăng nhập nhờ trên máy người khác)')) {
+      return;
+    }
+    resetSavedVault();
+    lockAndShowGate('🗑️ Đã xóa sạch khóa đăng nhập khỏi trình duyệt này.');
+  });
+
+  document.getElementById('sealInitialVaultBtn')?.addEventListener('click', async () => {
+    try {
+      const next = readCfgInputs();
+      const pass = document.getElementById('secInitialPass')?.value || '';
+      showSecMsg('⏳ Đang xác thực quyền chủ sở hữu GitHub và mã hóa khóa AES-256...');
+      await setupAdminVaultAndLogin({
+        ...next,
+        password: pass,
+        boundRepo: detectHostedRepoBinding(publishedMetaSource || siteData)
+      });
+      syncAdminSessionBadge();
+      renderPublishTab(ws);
+      showToast('🛡️ Đã bật khóa bảo mật mật khẩu cho BDS Studio!');
+    } catch (err) {
+      showSecMsg(`✕ ${escapeHTML(err.message)}`, true);
     }
   });
 
@@ -1760,6 +1883,17 @@ function bindGlobalStudioEvents() {
   document.getElementById('quickNewProjectTopBtn')?.addEventListener('click', openTemplateModal);
   document.getElementById('oneClickPublishTopBtn')?.addEventListener('click', openPublishModal);
 
+  const handleManualLock = () => {
+    lockAndShowGate('🔒 Đã khóa màn hình quản trị BDS Studio an toàn.');
+  };
+  document.getElementById('lockStudioTopBtn')?.addEventListener('click', handleManualLock);
+  document.getElementById('lockStudioSidebarBtn')?.addEventListener('click', handleManualLock);
+
+  // Ghi nhận thao tác người quản trị để duy trì phiên mở khóa
+  ['click', 'keydown', 'pointerdown', 'touchstart'].forEach((evtName) => {
+    window.addEventListener(evtName, () => touchActiveSession(), { passive: true });
+  });
+
   // Smart Paste modal
   document.getElementById('closeSmartPasteBtn')?.addEventListener('click', () => {
     document.getElementById('smartPasteModal')?.classList.remove('open');
@@ -1882,20 +2016,450 @@ function bindGlobalStudioEvents() {
   }
 }
 
-(async function initStudio() {
-  try {
-    await refreshUploadResolver();
+/* ================= HỆ THỐNG CỔNG ĐĂNG NHẬP & KHÓA QUẢN TRỊ ================= */
+function syncAdminSessionBadge() {
+  const badgeEl = document.getElementById('adminSessionBadgeText');
+  if (!badgeEl) return;
+  const session = getActiveSession();
+  if (!session) {
+    badgeEl.textContent = '🔒 Đang khóa';
+    return;
+  }
+  if (session.mode === 'github' && (session.adminLogin || session.owner)) {
+    const repoPart = session.repo ? ` • ${session.repo}` : '';
+    badgeEl.textContent = `🛡️ @${session.adminLogin || session.owner}${repoPart}`;
+  } else {
+    badgeEl.textContent = '💻 Chế độ Nội bộ (Localhost)';
+  }
+}
+
+function startInactivityMonitor() {
+  clearInterval(inactivityWatchTimer);
+  inactivityWatchTimer = setInterval(() => {
+    if (!document.body.classList.contains('studio-locked') && !getActiveSession()) {
+      lockAndShowGate('⏳ Đã tự động khóa sau 30 phút không thao tác. Bản nháp của bạn vẫn an toàn!');
+    }
+  }, 20000);
+}
+
+function lockAndShowGate(noticeMessage = '') {
+  clearInterval(inactivityWatchTimer);
+  clearInterval(lockoutCountdownTimer);
+  lockStudioSession();
+
+  // Đóng toàn bộ modal và xóa nội dung vùng làm việc khỏi DOM khi đang khóa
+  document.querySelectorAll('.st-modal-backdrop.open').forEach((m) => m.classList.remove('open'));
+  const ws = document.getElementById('studioWorkspace');
+  if (ws) ws.innerHTML = '';
+
+  document.body.classList.add('studio-locked');
+  renderAuthGate({ noticeMessage });
+}
+
+function bindPasswordEyeToggles(root) {
+  root.querySelectorAll('[data-toggle-pass]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const inputId = btn.getAttribute('data-toggle-pass');
+      const inp = document.getElementById(inputId);
+      if (!inp) return;
+      const isHidden = inp.type === 'password';
+      inp.type = isHidden ? 'text' : 'password';
+      btn.textContent = isHidden ? '🙈' : '👁️';
+    });
+  });
+}
+
+function renderAuthGate({ modeOverride = null, noticeMessage = '' } = {}) {
+  clearInterval(lockoutCountdownTimer);
+  const gate = document.getElementById('studioAuthGate');
+  if (!gate) return;
+
+  const vaultMeta = getVaultMeta();
+  const mode = modeOverride || (vaultMeta ? 'unlock' : 'setup');
+  const boundRepo = detectHostedRepoBinding(publishedMetaSource || siteData);
+  const isLocal = isLocalDevEnvironment();
+
+  if (mode === 'unlock' && vaultMeta) {
+    const initialChar = (vaultMeta.adminLogin || vaultMeta.owner || 'A').charAt(0).toUpperCase();
+    const lockout = getLockoutStatus();
+
+    gate.innerHTML = `
+      <div class="auth-card">
+        <div class="auth-brand-head">
+          <img src="./assets/images/logo-mark.svg" alt="BDS Studio" />
+          <div>
+            <span class="auth-eyebrow">🔒 Cổng Quản Trị Bảo Mật • AES-256</span>
+            <h1 class="auth-title">Đăng Nhập BDS Studio</h1>
+          </div>
+        </div>
+
+        <p class="auth-desc">
+          Nhập mật khẩu mở khóa quản trị để tiếp tục chỉnh sửa dự án và xuất bản lên Website.
+        </p>
+
+        ${noticeMessage ? `<div class="auth-notice info">${escapeHTML(noticeMessage)}</div>` : ''}
+        <div class="auth-notice error" id="authErrorBox" style="${lockout.isLockedOut ? '' : 'display:none;'}">
+          ${lockout.isLockedOut ? `⏳ Tạm khóa chống dò mật khẩu: vui lòng đợi ${lockout.remainingSeconds} giây.` : ''}
+        </div>
+
+        <div class="auth-admin-chip">
+          ${vaultMeta.adminAvatar
+            ? `<img src="${escapeHTML(vaultMeta.adminAvatar)}" alt="Admin" class="auth-admin-avatar" />`
+            : `<div class="auth-admin-avatar">${escapeHTML(initialChar)}</div>`
+          }
+          <div style="min-width:0;">
+            <div style="font-weight:700;color:var(--st-primary);font-size:0.94rem;">
+              @${escapeHTML(vaultMeta.adminLogin || vaultMeta.owner)}
+            </div>
+            <div style="font-size:0.8rem;color:var(--st-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              Kho lưu trữ: <strong>${escapeHTML(vaultMeta.owner)}/${escapeHTML(vaultMeta.repo)}</strong> (${escapeHTML(vaultMeta.branch || 'main')})
+            </div>
+          </div>
+        </div>
+
+        <form id="authUnlockForm">
+          <div class="st-field">
+            <label for="authUnlockPassword">Mật khẩu mở khóa Quản trị *</label>
+            <div class="auth-input-wrap">
+              <input
+                type="password"
+                id="authUnlockPassword"
+                class="st-input"
+                placeholder="Nhập mật khẩu của bạn..."
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="auth-eye-btn" data-toggle-pass="authUnlockPassword" title="Hiện/ẩn mật khẩu">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="st-btn st-btn-publish" id="authUnlockSubmitBtn" style="width:100%;padding:13px;font-size:0.95rem;" ${lockout.isLockedOut ? 'disabled' : ''}>
+            🔓 Mở Khóa BDS Studio
+          </button>
+        </form>
+
+        <div class="auth-footer-links">
+          <button type="button" class="auth-link-btn" id="switchToSetupModeBtn">
+            Đổi GitHub Token / Đặt lại mật khẩu
+          </button>
+          <a href="./index.html" style="color:var(--st-muted);text-decoration:none;font-weight:600;">
+            ← Về Website khách hàng
+          </a>
+        </div>
+      </div>
+    `;
+
+    bindPasswordEyeToggles(gate);
+
+    const errBox = document.getElementById('authErrorBox');
+    const submitBtn = document.getElementById('authUnlockSubmitBtn');
+    const passInput = document.getElementById('authUnlockPassword');
+    if (!lockout.isLockedOut) {
+      setTimeout(() => passInput?.focus(), 60);
+    } else {
+      startLockoutCountdown(errBox, submitBtn);
+    }
+
+    document.getElementById('switchToSetupModeBtn')?.addEventListener('click', () => {
+      renderAuthGate({
+        modeOverride: 'setup',
+        noticeMessage: 'Nhập lại mã GitHub Personal Access Token chính chủ để đặt mật khẩu mới.'
+      });
+    });
+
+    document.getElementById('authUnlockForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!submitBtn || !errBox) return;
+      errBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Đang giải mã khóa AES-256...';
+
+      try {
+        await unlockWithPassword(passInput.value, boundRepo);
+        await enterUnlockedWorkspace();
+        showToast('🔓 Chào mừng Quản trị viên quay trở lại!');
+      } catch (err) {
+        errBox.textContent = `✕ ${err.message}`;
+        errBox.style.display = 'block';
+        passInput.value = '';
+        passInput.focus();
+        const nextLock = getLockoutStatus();
+        if (nextLock.isLockedOut) {
+          submitBtn.textContent = '🔓 Mở Khóa BDS Studio';
+          startLockoutCountdown(errBox, submitBtn);
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '🔓 Mở Khóa BDS Studio';
+        }
+      }
+    });
+
+    return;
+  }
+
+  // CHẾ ĐỘ XÁC THỰC CHỦ SỞ HỮU GITHUB LẦN ĐẦU (HOẶC TRÊN THIẾT BỊ LẠ)
+  const prefillOwner = boundRepo.owner || vaultMeta?.owner || '';
+  const prefillRepo = boundRepo.repo || vaultMeta?.repo || '';
+  const prefillBranch = vaultMeta?.branch || 'main';
+  const readonlyAttr = boundRepo.locked ? 'readonly' : '';
+
+  gate.innerHTML = `
+    <div class="auth-card">
+      <div class="auth-brand-head">
+        <img src="./assets/images/logo-mark.svg" alt="BDS Studio" />
+        <div>
+          <span class="auth-eyebrow">🛡️ Xác Thực Chính Chủ GitHub</span>
+          <h1 class="auth-title">Thiết Lập Đăng Nhập Quản Trị</h1>
+        </div>
+      </div>
+
+      <p class="auth-desc">
+        Chỉ tài khoản có quyền <strong>Ghi (Write/Push)</strong> trên kho lưu trữ GitHub của Website mới có thể đăng nhập. Khóa Token sẽ được mã hóa <strong>AES-256</strong> để từ lần sau bạn chỉ cần nhập mật khẩu ngắn.
+      </p>
+
+      ${noticeMessage ? `<div class="auth-notice info">${escapeHTML(noticeMessage)}</div>` : ''}
+      <div class="auth-notice error" id="authErrorBox" style="display:none;"></div>
+
+      <form id="authSetupForm">
+        <div class="st-grid-2">
+          <div class="st-field">
+            <label for="authGhOwner">
+              GitHub Username * ${boundRepo.locked ? '<span style="color:#8E6C27;font-size:0.74rem;">🔒 Cố định</span>' : ''}
+            </label>
+            <div class="auth-input-wrap">
+              <input
+                type="text"
+                id="authGhOwner"
+                class="st-input"
+                style="padding-right:14px;"
+                value="${escapeHTML(prefillOwner)}"
+                placeholder="VD: quangbds"
+                ${readonlyAttr}
+                required
+              />
+            </div>
+          </div>
+
+          <div class="st-field">
+            <label for="authGhRepo">
+              Tên Repository * ${boundRepo.locked ? '<span style="color:#8E6C27;font-size:0.74rem;">🔒 Cố định</span>' : ''}
+            </label>
+            <div class="auth-input-wrap">
+              <input
+                type="text"
+                id="authGhRepo"
+                class="st-input"
+                style="padding-right:14px;"
+                value="${escapeHTML(prefillRepo)}"
+                placeholder="VD: bds-luxury"
+                ${readonlyAttr}
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="st-field">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <label for="authGhToken">GitHub Personal Access Token (PAT) *</label>
+            <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="font-size:0.79rem;color:var(--st-primary);font-weight:700;">
+              ↗ Lấy mã Fine-grained Token
+            </a>
+          </div>
+          <div class="auth-input-wrap">
+            <input
+              type="password"
+              id="authGhToken"
+              class="st-input"
+              placeholder="github_pat_... (Quyền Contents: Read and write)"
+              autocomplete="off"
+              required
+            />
+            <button type="button" class="auth-eye-btn" data-toggle-pass="authGhToken" title="Hiện/ẩn Token">👁️</button>
+          </div>
+        </div>
+
+        <div class="st-grid-2">
+          <div class="st-field">
+            <label for="authNewPassword">Đặt Mật khẩu mở khóa nhanh *</label>
+            <div class="auth-input-wrap">
+              <input
+                type="password"
+                id="authNewPassword"
+                class="st-input"
+                placeholder="Tối thiểu 4 ký tự..."
+                autocomplete="new-password"
+                minlength="4"
+                required
+              />
+              <button type="button" class="auth-eye-btn" data-toggle-pass="authNewPassword" title="Hiện/ẩn mật khẩu">👁️</button>
+            </div>
+          </div>
+
+          <div class="st-field">
+            <label for="authGhBranch">Nhánh xuất bản (Branch)</label>
+            <input
+              type="text"
+              id="authGhBranch"
+              class="st-input"
+              value="${escapeHTML(prefillBranch)}"
+              placeholder="main"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="st-btn st-btn-publish" id="authSetupSubmitBtn" style="width:100%;padding:13px;font-size:0.95rem;margin-top:4px;">
+          🛡️ Xác Thực GitHub &amp; Đăng Nhập
+        </button>
+      </form>
+
+      ${isLocal ? `
+        <div class="auth-divider">Hoặc chạy thử trên máy tính cá nhân</div>
+        <button type="button" class="st-btn st-btn-outline" id="enterLocalDevBtn" style="width:100%;">
+          💻 Vào chế độ Soạn thảo Nội bộ (Localhost — Chưa cần GitHub)
+        </button>
+      ` : ''}
+
+      <div class="auth-footer-links">
+        ${vaultMeta
+          ? `<button type="button" class="auth-link-btn" id="backToUnlockModeBtn">← Quay lại mở khóa bằng mật khẩu</button>`
+          : `<span style="color:var(--st-muted);">Token không bao giờ lưu lên mạng</span>`
+        }
+        <a href="./index.html" style="color:var(--st-muted);text-decoration:none;font-weight:600;">
+          ← Về Website khách hàng
+        </a>
+      </div>
+    </div>
+  `;
+
+  bindPasswordEyeToggles(gate);
+
+  setTimeout(() => {
+    const focusTarget = prefillOwner && prefillRepo
+      ? document.getElementById('authGhToken')
+      : document.getElementById('authGhOwner');
+    focusTarget?.focus();
+  }, 60);
+
+  document.getElementById('backToUnlockModeBtn')?.addEventListener('click', () => {
+    renderAuthGate({ modeOverride: 'unlock' });
+  });
+
+  document.getElementById('enterLocalDevBtn')?.addEventListener('click', async () => {
+    try {
+      loginLocalDevMode();
+      await enterUnlockedWorkspace();
+      showToast('💻 Đang mở BDS Studio ở chế độ máy cá nhân (Localhost)!');
+    } catch (err) {
+      const errBox = document.getElementById('authErrorBox');
+      if (errBox) {
+        errBox.textContent = `✕ ${err.message}`;
+        errBox.style.display = 'block';
+      }
+    }
+  });
+
+  document.getElementById('authSetupForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errBox = document.getElementById('authErrorBox');
+    const submitBtn = document.getElementById('authSetupSubmitBtn');
+    if (!errBox || !submitBtn) return;
+
+    errBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Đang kiểm tra quyền chủ sở hữu trên GitHub...';
+
+    try {
+      const owner = document.getElementById('authGhOwner')?.value || '';
+      const repo = document.getElementById('authGhRepo')?.value || '';
+      const branch = document.getElementById('authGhBranch')?.value || 'main';
+      const token = document.getElementById('authGhToken')?.value || '';
+      const password = document.getElementById('authNewPassword')?.value || '';
+
+      const { verified } = await setupAdminVaultAndLogin({
+        owner,
+        repo,
+        branch,
+        token,
+        password,
+        boundRepo
+      });
+
+      await enterUnlockedWorkspace();
+      showToast(`🛡️ Đã xác thực @${verified.adminLogin} & bật khóa mật khẩu AES-256!`);
+    } catch (err) {
+      errBox.textContent = `✕ ${err.message}`;
+      errBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = '🛡️ Xác Thực GitHub & Đăng Nhập';
+    }
+  });
+}
+
+function startLockoutCountdown(errBox, submitBtn) {
+  clearInterval(lockoutCountdownTimer);
+  if (submitBtn) submitBtn.disabled = true;
+  lockoutCountdownTimer = setInterval(() => {
+    const st = getLockoutStatus();
+    if (!st.isLockedOut) {
+      clearInterval(lockoutCountdownTimer);
+      if (errBox) errBox.style.display = 'none';
+      if (submitBtn) submitBtn.disabled = false;
+      document.getElementById('authUnlockPassword')?.focus();
+      return;
+    }
+    if (errBox) {
+      errBox.style.display = 'block';
+      errBox.textContent = `⏳ Tạm khóa chống dò mật khẩu: vui lòng đợi ${st.remainingSeconds} giây.`;
+    }
+  }, 1000);
+}
+
+async function enterUnlockedWorkspace() {
+  clearInterval(lockoutCountdownTimer);
+  document.body.classList.remove('studio-locked');
+  const gate = document.getElementById('studioAuthGate');
+  if (gate) gate.innerHTML = '';
+
+  await refreshUploadResolver();
+  if (!siteData) {
     const draft = getStudioDraft();
     if (draft) {
       siteData = draft;
     } else {
-      siteData = await fetchPublishedSiteData();
+      siteData = publishedMetaSource || (await fetchPublishedSiteData());
       markDraftClean(siteData);
     }
-    syncSidebarCounters();
-    updateTopStatusUI();
+  }
+
+  syncSidebarCounters();
+  updateTopStatusUI();
+  syncAdminSessionBadge();
+
+  if (!globalEventsBound) {
     bindGlobalStudioEvents();
-    renderWorkspace();
+    globalEventsBound = true;
+  }
+
+  startInactivityMonitor();
+  renderWorkspace();
+}
+
+(async function initStudio() {
+  try {
+    // Đọc nhẹ metadata công khai để biết repoOwner/repoName nếu chạy trên tên miền riêng
+    try {
+      publishedMetaSource = await fetchPublishedSiteData();
+    } catch {
+      publishedMetaSource = null;
+    }
+
+    if (getActiveSession()) {
+      await enterUnlockedWorkspace();
+    } else {
+      document.body.classList.add('studio-locked');
+      renderAuthGate();
+    }
   } catch (err) {
     console.error(err);
   }
