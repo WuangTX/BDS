@@ -1,12 +1,14 @@
 {
   "meta": {
-    "updatedAt": "2026-11-18T04:45:00+07:00",
-    "version": 1
+    "updatedAt": "2026-11-19T09:07:26.735Z",
+    "version": 2,
+    "repoOwner": "wuangtx",
+    "repoName": "BDS"
   },
   "brand": {
-    "name": "Hưng Lộc Phát Luxury",
+    "name": "Loan xù",
     "tagline": "Kiến Tạo Không Gian Sống Xanh & Biểu Tượng Thịnh Vượng",
-    "logoUrl": "./assets/images/logo-mark.svg",
+    "logoUrl": "./assets/uploads/logo-the-odyssey-imax-2026-wl-mwlsvqf4.webp",
     "logoSubtext": "REAL ESTATE DEVELOPMENT",
     "description": "Lấy cảm hứng từ sự giao hòa mềm mại giữa kiến trúc đương đại, mặt nước tự nhiên và mảng xanh nhiệt đới, chúng tôi kiến tạo những tổ ấm mang giá trị truyền đời và tiềm năng gia tăng bền vững.",
     "hotline": "0909 888 688",
@@ -18,15 +20,15 @@
     "leadWebhookUrl": ""
   },
   "theme": {
-    "preset": "emerald-champagne",
-    "primary": "#0E3A2F",
-    "primarySoft": "#175445",
-    "accent": "#C8A45D",
-    "accentSoft": "#E6C987",
-    "surface": "#FAF8F4",
-    "surfaceAlt": "#F2EDE3",
-    "radiusStyle": "soft",
-    "fontStyle": "editorial"
+    "preset": "botanical-sage",
+    "primary": "#233f32",
+    "primarySoft": "#233f32",
+    "accent": "#b88b58",
+    "accentSoft": "#DEC09A",
+    "surface": "#f7f8f4",
+    "surfaceAlt": "#ECEFE6",
+    "radiusStyle": "classic",
+    "fontStyle": "modern"
   },
   "heroSlides": [
     {
@@ -106,6 +108,147 @@
   ],
   "projects": [
     {
+      "id": "proj-1794986551320",
+      "slug": "looooooo",
+      "name": "looooooo",
+      "category": "Căn hộ hạng sang",
+      "status": "Đang mở bán",
+      "featured": true,
+      "tagline": "Tuyệt tác căn hộ xanh kiến trúc hữu cơ giữa lòng đô thị",
+      "priceDisplay": "Từ 65 triệu/m²",
+      "numericPriceBillion": 5.2,
+      "areaRange": "55m² – 145m² (1PN – 3PN & Penthouse)",
+      "locationShort": "TP. Hồ Chí Minh",
+      "address": "Trung tâm Khu đô thị mới, TP. Hồ Chí Minh",
+      "heroImage": "./assets/images/hero-emerald-residences.jpg",
+      "summary": "looooooo được kiến tạo theo chuẩn mực sinh thái hiện đại, hài hòa giữa kiến trúc tinh tế, tiện ích nội khu đồng bộ và tiềm năng gia tăng giá trị bền vững.",
+      "highlights": [
+        "Mật độ xây dựng thấp dưới 28%, ưu tiên mảng xanh & mặt nước",
+        "Ban công kính cong Panorama đón gió và ánh sáng tự nhiên",
+        "Thanh toán chỉ 20% đến khi nhận bàn giao căn hộ",
+        "Pháp lý minh bạch — Sổ hồng sở hữu lâu dài"
+      ],
+      "specs": [
+        {
+          "label": "Chủ đầu tư",
+          "value": "Hưng Lộc Phát Luxury"
+        },
+        {
+          "label": "Tổng diện tích",
+          "value": "3,8 ha"
+        },
+        {
+          "label": "Mật độ xây dựng",
+          "value": "27,5%"
+        },
+        {
+          "label": "Quy mô",
+          "value": "2 Tháp cao 32 tầng • 680 căn hộ cao cấp"
+        },
+        {
+          "label": "Tiêu chuẩn bàn giao",
+          "value": "Nội thất liền tường cao cấp Châu Âu"
+        },
+        {
+          "label": "Pháp lý",
+          "value": "Sổ hồng sở hữu lâu dài"
+        },
+        {
+          "label": "Dự kiến bàn giao",
+          "value": "Quý IV / 2027"
+        }
+      ],
+      "location": {
+        "description": "Tọa lạc tại tâm điểm kết nối giao thông huyết mạch, từ looooooo cư dân thuận tiện tiếp cận chuỗi tiện ích thương mại, trường học và bệnh viện quốc tế.",
+        "mapQuery": "Ho Chi Minh City",
+        "mapEmbedUrl": "",
+        "connections": [
+          {
+            "time": "05 phút",
+            "place": "Trung tâm thương mại & Trường quốc tế",
+            "detail": "Tiện ích hiện hữu liền kề"
+          },
+          {
+            "time": "12 phút",
+            "place": "Trung tâm tài chính hành chính",
+            "detail": "Đại lộ kết nối thông suốt"
+          }
+        ]
+      },
+      "amenities": [
+        {
+          "icon": "waves",
+          "title": "Hồ Bơi Khoáng Muối Vô Cực",
+          "desc": "Công nghệ điện phân muối tự nhiên an toàn cho sức khỏe, tích hợp ghế thư giãn chìm Sunken Lounge.",
+          "image": ""
+        },
+        {
+          "icon": "trees",
+          "title": "Công Viên Ven Sông & Đường Dạo Bộ",
+          "desc": "Không gian sinh thái rợp bóng cây cổ thụ, thảm cỏ dã ngoại và đường chạy bộ lát đá tự nhiên.",
+          "image": ""
+        },
+        {
+          "icon": "sparkles",
+          "title": "Sky Lounge & Vườn Thượng Uyển Chân Mây",
+          "desc": "Thưởng ngoạn toàn cảnh thành phố 360 độ từ tầng thượng cùng quầy rượu vang tinh tế.",
+          "image": ""
+        },
+        {
+          "icon": "heart",
+          "title": "Tổ Hợp Onsen Khoáng Nóng & Wellness Spa",
+          "desc": "Chăm sóc và phục hồi năng lượng chuyên sâu chuẩn Nhật Bản dành riêng cho cư dân.",
+          "image": ""
+        }
+      ],
+      "floorPlans": [
+        {
+          "id": "fp-1794986551320",
+          "title": "Mặt Bằng Tổng Thể",
+          "area": "Quy hoạch đồng bộ",
+          "specs": "55m² – 145m² (1PN – 3PN & Penthouse)",
+          "image": "./assets/images/floorplan-master.svg"
+        }
+      ],
+      "policies": {
+        "bankSupport": "Ngân hàng đối tác bảo lãnh & hỗ trợ vay 70%, lãi suất 0% trong 24 tháng.",
+        "discountNote": "Chiết khấu thanh toán sớm hấp dẫn dành cho khách hàng đăng ký đợt đầu.",
+        "milestones": [
+          {
+            "step": "Đợt 1",
+            "title": "Ký Hợp đồng mua bán",
+            "percent": "15%",
+            "note": "Ngay khi ký HĐMB"
+          },
+          {
+            "step": "Đợt 2",
+            "title": "Thanh toán giãn cách theo tháng",
+            "percent": "5%",
+            "note": "Nhẹ nhàng dòng tiền"
+          },
+          {
+            "step": "Đợt 3",
+            "title": "Nhận bàn giao căn hộ",
+            "percent": "75%",
+            "note": "Ngân hàng hỗ trợ lãi suất 0%"
+          },
+          {
+            "step": "Đợt 4",
+            "title": "Nhận Sổ hồng",
+            "percent": "5%",
+            "note": "Sở hữu lâu dài"
+          }
+        ]
+      },
+      "gallery": [
+        {
+          "url": "./assets/images/hero-emerald-residences.jpg",
+          "caption": "Phối cảnh tổng thể looooooo"
+        }
+      ],
+      "videoUrl": ""
+    },
+    {
       "id": "proj-1",
       "slug": "the-emerald-crown-quan-7",
       "name": "The Emerald Crown Nam Sài Gòn",
@@ -127,25 +270,68 @@
         "Bàn giao nội thất liền tường Châu Âu & kính Low-E 3 lớp cách âm"
       ],
       "specs": [
-        { "label": "Chủ đầu tư", "value": "Tập đoàn Hưng Lộc Phát Luxury" },
-        { "label": "Vị trí", "value": "Đại lộ Nguyễn Lương Bằng, Quận 7, TP.HCM" },
-        { "label": "Tổng diện tích quy hoạch", "value": "5,28 ha ven sông cảnh quan" },
-        { "label": "Mật độ xây dựng", "value": "26,8% (Khối tháp)" },
-        { "label": "Quy mô", "value": "2 Tháp đôi cao 35 tầng • 840 căn hộ & 24 biệt thự ven sông" },
-        { "label": "Đơn vị thiết kế kiến trúc", "value": "Ong & Ong (Singapore)" },
-        { "label": "Quản lý vận hành", "value": "Savills Quốc Tế" },
-        { "label": "Pháp lý", "value": "Sổ hồng sở hữu lâu dài (Người Việt Nam)" },
-        { "label": "Dự kiến bàn giao", "value": "Quý II / 2028" }
+        {
+          "label": "Chủ đầu tư",
+          "value": "Tập đoàn Hưng Lộc Phát Luxury"
+        },
+        {
+          "label": "Vị trí",
+          "value": "Đại lộ Nguyễn Lương Bằng, Quận 7, TP.HCM"
+        },
+        {
+          "label": "Tổng diện tích quy hoạch",
+          "value": "5,28 ha ven sông cảnh quan"
+        },
+        {
+          "label": "Mật độ xây dựng",
+          "value": "26,8% (Khối tháp)"
+        },
+        {
+          "label": "Quy mô",
+          "value": "2 Tháp đôi cao 35 tầng • 840 căn hộ & 24 biệt thự ven sông"
+        },
+        {
+          "label": "Đơn vị thiết kế kiến trúc",
+          "value": "Ong & Ong (Singapore)"
+        },
+        {
+          "label": "Quản lý vận hành",
+          "value": "Savills Quốc Tế"
+        },
+        {
+          "label": "Pháp lý",
+          "value": "Sổ hồng sở hữu lâu dài (Người Việt Nam)"
+        },
+        {
+          "label": "Dự kiến bàn giao",
+          "value": "Quý II / 2028"
+        }
       ],
       "location": {
         "description": "Tọa lạc trên trục đại lộ thương mại tài chính Nguyễn Lương Bằng rộng 48m, liền kề khu đô thị kiểu mẫu Phú Mỹ Hưng. Từ dự án, cư dân dễ dàng kết nối chuỗi trường quốc tế, bệnh viện chuẩn quốc tế và trung tâm Quận 1 chỉ trong vài phút di chuyển.",
         "mapQuery": "Nguyen Luong Bang, Quan 7, Ho Chi Minh",
         "mapEmbedUrl": "",
         "connections": [
-          { "time": "03 phút", "place": "Khu đô thị Phú Mỹ Hưng", "detail": "Crescent Mall, Hồ Bán Nguyệt, Cầu Ánh Sao" },
-          { "time": "05 phút", "place": "Hệ thống Trường Quốc tế", "detail": "SSIS, RMIT, Đinh Thiện Lý, Canada (CIS)" },
-          { "time": "07 phút", "place": "Bệnh viện FV & Tâm Đức", "detail": "Chăm sóc y tế tiêu chuẩn Pháp quốc tế" },
-          { "time": "15 phút", "place": "Trung tâm Quận 1 & Thủ Thiêm", "detail": "Kết nối nhanh qua trục Nguyễn Văn Linh – Cầu Thủ Thiêm 4" }
+          {
+            "time": "03 phút",
+            "place": "Khu đô thị Phú Mỹ Hưng",
+            "detail": "Crescent Mall, Hồ Bán Nguyệt, Cầu Ánh Sao"
+          },
+          {
+            "time": "05 phút",
+            "place": "Hệ thống Trường Quốc tế",
+            "detail": "SSIS, RMIT, Đinh Thiện Lý, Canada (CIS)"
+          },
+          {
+            "time": "07 phút",
+            "place": "Bệnh viện FV & Tâm Đức",
+            "detail": "Chăm sóc y tế tiêu chuẩn Pháp quốc tế"
+          },
+          {
+            "time": "15 phút",
+            "place": "Trung tâm Quận 1 & Thủ Thiêm",
+            "detail": "Kết nối nhanh qua trục Nguyễn Văn Linh – Cầu Thủ Thiêm 4"
+          }
         ]
       },
       "amenities": [
@@ -213,17 +399,49 @@
         "bankSupport": "Ngân hàng Vietcombank & MB Bank hỗ trợ vay 70% giá trị căn hộ, ân hạn gốc và lãi suất 0% suốt 24 tháng.",
         "discountNote": "Chiết khấu thanh toán nhanh lên đến 9.5% + Tặng gói Quản lý vận hành Savills 24 tháng.",
         "milestones": [
-          { "step": "Đợt 1", "title": "Ký Thỏa thuận & Hợp đồng mua bán", "percent": "15%", "note": "Ngay khi ký HĐMB chính thức" },
-          { "step": "Đợt 2", "title": "Thanh toán giãn cách nhẹ nhàng", "percent": "0.8%/tháng", "note": "Chia nhỏ trong 12 tháng tiếp theo" },
-          { "step": "Đợt 3", "title": "Thông báo bàn giao căn hộ", "percent": "70%", "note": "Ngân hàng giải ngân ân hạn gốc & lãi" },
-          { "step": "Đợt 4", "title": "Nhận Giấy chứng nhận (Sổ hồng)", "percent": "5%", "note": "Hoàn tất quyền sở hữu lâu dài" }
+          {
+            "step": "Đợt 1",
+            "title": "Ký Thỏa thuận & Hợp đồng mua bán",
+            "percent": "15%",
+            "note": "Ngay khi ký HĐMB chính thức"
+          },
+          {
+            "step": "Đợt 2",
+            "title": "Thanh toán giãn cách nhẹ nhàng",
+            "percent": "0.8%/tháng",
+            "note": "Chia nhỏ trong 12 tháng tiếp theo"
+          },
+          {
+            "step": "Đợt 3",
+            "title": "Thông báo bàn giao căn hộ",
+            "percent": "70%",
+            "note": "Ngân hàng giải ngân ân hạn gốc & lãi"
+          },
+          {
+            "step": "Đợt 4",
+            "title": "Nhận Giấy chứng nhận (Sổ hồng)",
+            "percent": "5%",
+            "note": "Hoàn tất quyền sở hữu lâu dài"
+          }
         ]
       },
       "gallery": [
-        { "url": "./assets/images/hero-emerald-residences.jpg", "caption": "Phối cảnh tổng thể The Emerald Crown lúc hoàng hôn bên sông Sài Gòn" },
-        { "url": "./assets/images/amenity-sky-pool.jpg", "caption": "Hồ bơi vô cực chân mây & vườn nhiệt đới trên cao" },
-        { "url": "./assets/images/interior-luxury-penthouse.jpg", "caption": "Không gian phòng khách kính cong tràn viền đón trọn ánh hoàng hôn" },
-        { "url": "./assets/images/project-riverside-villas.jpg", "caption": "Phân khu dinh thự vườn ven sông biệt lập trong lòng dự án" }
+        {
+          "url": "./assets/images/hero-emerald-residences.jpg",
+          "caption": "Phối cảnh tổng thể The Emerald Crown lúc hoàng hôn bên sông Sài Gòn"
+        },
+        {
+          "url": "./assets/images/amenity-sky-pool.jpg",
+          "caption": "Hồ bơi vô cực chân mây & vườn nhiệt đới trên cao"
+        },
+        {
+          "url": "./assets/images/interior-luxury-penthouse.jpg",
+          "caption": "Không gian phòng khách kính cong tràn viền đón trọn ánh hoàng hôn"
+        },
+        {
+          "url": "./assets/images/project-riverside-villas.jpg",
+          "caption": "Phân khu dinh thự vườn ven sông biệt lập trong lòng dự án"
+        }
       ],
       "videoUrl": ""
     },
@@ -249,21 +467,51 @@
         "Bến du thuyền riêng tư kết nối thẳng về Bến Bạch Đằng Quận 1"
       ],
       "specs": [
-        { "label": "Chủ đầu tư", "value": "Hưng Lộc Phát Luxury" },
-        { "label": "Quy mô", "value": "9,4 ha • 68 Dinh thự Song lập & Đơn lập" },
-        { "label": "Mật độ xây dựng", "value": "Chỉ 21,5%" },
-        { "label": "Kết cấu dinh thự", "value": "1 Hầm rượu + 1 Trệt + 2 Lầu + Sân thượng vườn" },
-        { "label": "Pháp lý", "value": "Sổ hồng riêng từng nền • Sở hữu lâu dài" },
-        { "label": "Dự kiến bàn giao", "value": "Quý IV / 2027" }
+        {
+          "label": "Chủ đầu tư",
+          "value": "Hưng Lộc Phát Luxury"
+        },
+        {
+          "label": "Quy mô",
+          "value": "9,4 ha • 68 Dinh thự Song lập & Đơn lập"
+        },
+        {
+          "label": "Mật độ xây dựng",
+          "value": "Chỉ 21,5%"
+        },
+        {
+          "label": "Kết cấu dinh thự",
+          "value": "1 Hầm rượu + 1 Trệt + 2 Lầu + Sân thượng vườn"
+        },
+        {
+          "label": "Pháp lý",
+          "value": "Sổ hồng riêng từng nền • Sở hữu lâu dài"
+        },
+        {
+          "label": "Dự kiến bàn giao",
+          "value": "Quý IV / 2027"
+        }
       ],
       "location": {
         "description": "Nằm trên trục xương sống Bắc – Nam Nguyễn Hữu Thọ, liền kề đại đô thị Zeitgeist và Phú Mỹ Hưng, hưởng trọn làn sóng hạ tầng tuyến Metro số 4 và nút giao Nguyễn Văn Linh.",
         "mapQuery": "Phuoc Kien, Nha Be, Ho Chi Minh",
         "mapEmbedUrl": "",
         "connections": [
-          { "time": "05 phút", "place": "Phú Mỹ Hưng Quận 7", "detail": "Chuỗi nhà hàng, tài chính, giáo dục quốc tế" },
-          { "time": "08 phút", "place": "Đại học RMIT & Tôn Đức Thắng", "detail": "Tâm điểm cộng đồng chuyên gia quốc tế" },
-          { "time": "18 phút", "place": "Chợ Bến Thành Quận 1", "detail": "Di chuyển bằng đường bộ hoặc cano sông" }
+          {
+            "time": "05 phút",
+            "place": "Phú Mỹ Hưng Quận 7",
+            "detail": "Chuỗi nhà hàng, tài chính, giáo dục quốc tế"
+          },
+          {
+            "time": "08 phút",
+            "place": "Đại học RMIT & Tôn Đức Thắng",
+            "detail": "Tâm điểm cộng đồng chuyên gia quốc tế"
+          },
+          {
+            "time": "18 phút",
+            "place": "Chợ Bến Thành Quận 1",
+            "detail": "Di chuyển bằng đường bộ hoặc cano sông"
+          }
         ]
       },
       "amenities": [
@@ -299,15 +547,41 @@
         "bankSupport": "Hỗ trợ lãi suất 0% trong 24 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ.",
         "discountNote": "Ưu đãi Booking sớm 300 triệu đồng + Tặng gói thiết kế sân vườn Nhật Bản.",
         "milestones": [
-          { "step": "Đợt 1", "title": "Ký Văn bản thỏa thuận / HĐMB", "percent": "15%", "note": "Xác nhận quyền sở hữu vị trí đẹp" },
-          { "step": "Đợt 2", "title": "Hoàn thiện phần khung dinh thự", "percent": "15%", "note": "Sau 6 tháng kể từ Đợt 1" },
-          { "step": "Đợt 3", "title": "Bàn giao dinh thự hoàn thiện mặt ngoài", "percent": "65%", "note": "Ngân hàng giải ngân gói ưu đãi" },
-          { "step": "Đợt 4", "title": "Trao Sổ hồng riêng", "percent": "5%", "note": "Sở hữu lâu dài" }
+          {
+            "step": "Đợt 1",
+            "title": "Ký Văn bản thỏa thuận / HĐMB",
+            "percent": "15%",
+            "note": "Xác nhận quyền sở hữu vị trí đẹp"
+          },
+          {
+            "step": "Đợt 2",
+            "title": "Hoàn thiện phần khung dinh thự",
+            "percent": "15%",
+            "note": "Sau 6 tháng kể từ Đợt 1"
+          },
+          {
+            "step": "Đợt 3",
+            "title": "Bàn giao dinh thự hoàn thiện mặt ngoài",
+            "percent": "65%",
+            "note": "Ngân hàng giải ngân gói ưu đãi"
+          },
+          {
+            "step": "Đợt 4",
+            "title": "Trao Sổ hồng riêng",
+            "percent": "5%",
+            "note": "Sở hữu lâu dài"
+          }
         ]
       },
       "gallery": [
-        { "url": "./assets/images/project-riverside-villas.jpg", "caption": "Dinh thự nhiệt đới bên hồ sen phản chiếu nắng mai" },
-        { "url": "./assets/images/interior-luxury-penthouse.jpg", "caption": "Phòng khách thông tầng sang trọng với nội thất đường cong mềm mại" }
+        {
+          "url": "./assets/images/project-riverside-villas.jpg",
+          "caption": "Dinh thự nhiệt đới bên hồ sen phản chiếu nắng mai"
+        },
+        {
+          "url": "./assets/images/interior-luxury-penthouse.jpg",
+          "caption": "Phòng khách thông tầng sang trọng với nội thất đường cong mềm mại"
+        }
       ],
       "videoUrl": ""
     },
@@ -333,20 +607,47 @@
         "Tặng 30 đêm nghỉ dưỡng thượng lưu miễn phí mỗi năm trên toàn hệ thống"
       ],
       "specs": [
-        { "label": "Chủ đầu tư", "value": "Hưng Lộc Phát Luxury" },
-        { "label": "Quy mô", "value": "31,5 ha mặt biển • 1,2km bờ biển riêng" },
-        { "label": "Sản phẩm", "value": "Biệt thự biển, Boutique Shophouse & Condotel 5 sao" },
-        { "label": "Đơn vị vận hành", "value": "Thương hiệu Quản lý Khách sạn Quốc tế" },
-        { "label": "Dự kiến đi vào vận hành", "value": "Quý III / 2027" }
+        {
+          "label": "Chủ đầu tư",
+          "value": "Hưng Lộc Phát Luxury"
+        },
+        {
+          "label": "Quy mô",
+          "value": "31,5 ha mặt biển • 1,2km bờ biển riêng"
+        },
+        {
+          "label": "Sản phẩm",
+          "value": "Biệt thự biển, Boutique Shophouse & Condotel 5 sao"
+        },
+        {
+          "label": "Đơn vị vận hành",
+          "value": "Thương hiệu Quản lý Khách sạn Quốc tế"
+        },
+        {
+          "label": "Dự kiến đi vào vận hành",
+          "value": "Quý III / 2027"
+        }
       ],
       "location": {
         "description": "Tâm điểm thủ phủ resort Mũi Né trên đại lộ Võ Nguyên Giáp, kết nối trực tiếp cao tốc Phan Thiết – Dầu Giây và Sân bay Phan Thiết trong bán kính 10 phút.",
         "mapQuery": "Vo Nguyen Giap, Mui Ne, Phan Thiet",
         "mapEmbedUrl": "",
         "connections": [
-          { "time": "08 phút", "place": "Sân bay Phan Thiết", "detail": "Đón dòng khách du lịch miền Bắc & quốc tế" },
-          { "time": "12 phút", "place": "Nút giao Cao tốc Phan Thiết", "detail": "Rút ngắn quãng đường từ TP.HCM còn 2 giờ" },
-          { "time": "05 phút", "place": "Đồi Cát Bay & Sân Golf 36 hố", "detail": "Tâm điểm du lịch – thể thao biển quốc tế" }
+          {
+            "time": "08 phút",
+            "place": "Sân bay Phan Thiết",
+            "detail": "Đón dòng khách du lịch miền Bắc & quốc tế"
+          },
+          {
+            "time": "12 phút",
+            "place": "Nút giao Cao tốc Phan Thiết",
+            "detail": "Rút ngắn quãng đường từ TP.HCM còn 2 giờ"
+          },
+          {
+            "time": "05 phút",
+            "place": "Đồi Cát Bay & Sân Golf 36 hố",
+            "detail": "Tâm điểm du lịch – thể thao biển quốc tế"
+          }
         ]
       },
       "amenities": [
@@ -376,15 +677,41 @@
         "bankSupport": "Hỗ trợ vay 65% giá trị biệt thự, ân hạn nợ gốc 30 tháng.",
         "discountNote": "Nhận trước 2 năm lợi nhuận khai thác trừ trực tiếp 12% vào giá bán.",
         "milestones": [
-          { "step": "Đợt 1", "title": "Ký Hợp đồng đặt cọc / HĐMB", "percent": "15%", "note": "Chọn căn mặt biển đẹp nhất" },
-          { "step": "Đợt 2", "title": "Thanh toán theo tiến độ xây dựng", "percent": "15%", "note": "Chia làm 5 đợt nhẹ nhàng" },
-          { "step": "Đợt 3", "title": "Bàn giao full nội thất 5 sao khai thác ngay", "percent": "65%", "note": "Bắt đầu nhận dòng tiền chia sẻ lợi nhuận" },
-          { "step": "Đợt 4", "title": "Hoàn tất thủ tục pháp lý", "percent": "5%", "note": "Theo quy định hiện hành" }
+          {
+            "step": "Đợt 1",
+            "title": "Ký Hợp đồng đặt cọc / HĐMB",
+            "percent": "15%",
+            "note": "Chọn căn mặt biển đẹp nhất"
+          },
+          {
+            "step": "Đợt 2",
+            "title": "Thanh toán theo tiến độ xây dựng",
+            "percent": "15%",
+            "note": "Chia làm 5 đợt nhẹ nhàng"
+          },
+          {
+            "step": "Đợt 3",
+            "title": "Bàn giao full nội thất 5 sao khai thác ngay",
+            "percent": "65%",
+            "note": "Bắt đầu nhận dòng tiền chia sẻ lợi nhuận"
+          },
+          {
+            "step": "Đợt 4",
+            "title": "Hoàn tất thủ tục pháp lý",
+            "percent": "5%",
+            "note": "Theo quy định hiện hành"
+          }
         ]
       },
       "gallery": [
-        { "url": "./assets/images/project-coastal-retreat.jpg", "caption": "Toàn cảnh Solaris Ocean Retreat rực rỡ bên bờ biển ngọc bích" },
-        { "url": "./assets/images/amenity-sky-pool.jpg", "caption": "Không gian thư giãn hồ bơi vô cực lúc hoàng hôn" }
+        {
+          "url": "./assets/images/project-coastal-retreat.jpg",
+          "caption": "Toàn cảnh Solaris Ocean Retreat rực rỡ bên bờ biển ngọc bích"
+        },
+        {
+          "url": "./assets/images/amenity-sky-pool.jpg",
+          "caption": "Không gian thư giãn hồ bơi vô cực lúc hoàng hôn"
+        }
       ],
       "videoUrl": ""
     }
@@ -431,11 +758,29 @@
     }
   ],
   "partners": [
-    { "name": "Vietcombank", "role": "Ngân hàng bảo lãnh chiến lược" },
-    { "name": "MB Bank", "role": "Đối tác tài trợ tín dụng" },
-    { "name": "Ong & Ong Singapore", "role": "Tư vấn thiết kế kiến trúc & cảnh quan" },
-    { "name": "Savills Quốc Tế", "role": "Tư vấn quản lý & vận hành 5 sao" },
-    { "name": "Coteccons / Hòa Bình", "role": "Tổng thầu thi công chất lượng cao" },
-    { "name": "Artelia Pháp", "role": "Tư vấn giám sát chuẩn quốc tế" }
+    {
+      "name": "Vietcombank",
+      "role": "Ngân hàng bảo lãnh chiến lược"
+    },
+    {
+      "name": "MB Bank",
+      "role": "Đối tác tài trợ tín dụng"
+    },
+    {
+      "name": "Ong & Ong Singapore",
+      "role": "Tư vấn thiết kế kiến trúc & cảnh quan"
+    },
+    {
+      "name": "Savills Quốc Tế",
+      "role": "Tư vấn quản lý & vận hành 5 sao"
+    },
+    {
+      "name": "Coteccons / Hòa Bình",
+      "role": "Tổng thầu thi công chất lượng cao"
+    },
+    {
+      "name": "Artelia Pháp",
+      "role": "Tư vấn giám sát chuẩn quốc tế"
+    }
   ]
 }
