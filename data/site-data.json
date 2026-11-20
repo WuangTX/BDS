@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updatedAt": "2026-11-20T02:06:24.769Z",
-    "version": 3,
+    "updatedAt": "2026-11-20T02:07:33.673Z",
+    "version": 4,
     "repoOwner": "wuangtx",
     "repoName": "BDS"
   },
@@ -23,9 +23,9 @@
     "preset": "botanical-sage",
     "primary": "#c534c1",
     "primarySoft": "#c534c1",
-    "accent": "#b88b58",
+    "accent": "#000000",
     "accentSoft": "#DEC09A",
-    "surface": "#f7f8f4",
+    "surface": "#98bd28",
     "surfaceAlt": "#ECEFE6",
     "radiusStyle": "classic",
     "fontStyle": "modern"
