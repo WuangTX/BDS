@@ -1,97 +1,67 @@
 {
   "meta": {
-    "updatedAt": "2026-11-20T02:07:33.673Z",
-    "version": 4,
+    "updatedAt": "2026-11-20T02:22:50.644Z",
+    "version": 3,
     "repoOwner": "wuangtx",
     "repoName": "BDS"
   },
   "brand": {
-    "name": "Loan xù",
-    "tagline": "Kiến Tạo Không Gian Sống Xanh & Biểu Tượng Thịnh Vượng",
-    "logoUrl": "./assets/uploads/logo-the-odyssey-imax-2026-wl-mwlsvqf4.webp",
-    "logoSubtext": "REAL ESTATE DEVELOPMENT",
+    "name": "Trần Loan Land",
+    "tagline": "NHÀ ĐẤT CÓ TÂM - ĐẦU TƯ CÓ TẦM",
+    "logoUrl": "./assets/uploads/logo-bieu-tuong-ngoi-nha-chu-l-vang-xanh-mwnc6ifi.webp",
+    "logoSubtext": "",
     "description": "Lấy cảm hứng từ sự giao hòa mềm mại giữa kiến trúc đương đại, mặt nước tự nhiên và mảng xanh nhiệt đới, chúng tôi kiến tạo những tổ ấm mang giá trị truyền đời và tiềm năng gia tăng bền vững.",
-    "hotline": "0909 888 688",
-    "zalo": "0909888688",
+    "hotline": "0935.999.870",
+    "zalo": "0935999870",
     "messenger": "https://m.me/",
-    "email": "lienhe@hunglocphat-luxury.vn",
-    "address": "Tầng 18, The Emerald Tower, Đại lộ Nguyễn Lương Bằng, Quận 7, TP. Hồ Chí Minh",
+    "email": "tranthiloanktr@gmail.com",
+    "address": "09 Nguyễn Sinh Sắc - Hòa Minh - Đà Nẵng",
     "workingHours": "08:00 – 20:30 (Thứ 2 – Chủ Nhật)",
     "leadWebhookUrl": ""
   },
   "theme": {
-    "preset": "botanical-sage",
-    "primary": "#c534c1",
-    "primarySoft": "#c534c1",
-    "accent": "#000000",
-    "accentSoft": "#DEC09A",
-    "surface": "#98bd28",
-    "surfaceAlt": "#ECEFE6",
+    "preset": "emerald-champagne",
+    "primary": "#ff0000",
+    "primarySoft": "#ff0000",
+    "accent": "#f7eacf",
+    "accentSoft": "#E6C987",
+    "surface": "#faf8f4",
+    "surfaceAlt": "#F2EDE3",
     "radiusStyle": "classic",
     "fontStyle": "modern"
   },
   "heroSlides": [
     {
-      "id": "slide-1",
-      "badge": "TUYỆT TÁC CĂN HỘ VƯỜN CHÂN MÂY NAM SÀI GÒN",
-      "title": "The Emerald Crown — Nơi Rừng Xanh Chạm Tới Tầng Mây",
-      "subtitle": "Sở hữu ban công kính cong Panorama phủ đầy cây xanh nhiệt đới, ôm trọn khúc uốn mềm mại của dòng sông Sài Gòn cùng hồ bơi khoáng muối tràn bờ 1.200m².",
-      "image": "./assets/images/hero-emerald-residences.jpg",
-      "ctaPrimaryText": "Khám phá tuyệt tác",
-      "projectSlug": "the-emerald-crown-quan-7",
-      "highlightMetric": "Chỉ thanh toán 20% đến khi nhận nhà"
-    },
-    {
-      "id": "slide-2",
-      "badge": "KHU BIỆT THỰ COMPOUND VEN SÔNG BIỆT LẬP",
-      "title": "Amara Riverside — Bản Giao Hưởng An Yên Bên Bến Du Thuyền",
-      "subtitle": "Chỉ 68 dinh thự sinh thái giới hạn với bến neo du thuyền riêng tư, công viên đầm sen 3.2ha và đặc quyền quản gia chuẩn khách sạn 5 sao.",
-      "image": "./assets/images/project-riverside-villas.jpg",
-      "ctaPrimaryText": "Xem chi tiết dinh thự",
-      "projectSlug": "amara-riverside-villas",
-      "highlightMetric": "Sổ hồng lâu dài • Bàn giao Quý IV/2027"
-    },
-    {
       "id": "slide-3",
-      "badge": "TỔ HỢP NGHỈ DƯỠNG & THƯƠNG MẠI MẶT BIỂN",
-      "title": "Solaris Ocean Retreat — Ánh Dương Địa Trung Hải Giữa Mũi Né",
-      "subtitle": "Tận hưởng 1.2km đường bờ biển ngọc lam riêng biệt, chuỗi hồ bơi vô cực nối liền đại dương và đại lộ Shophouse sầm uất suốt bốn mùa.",
-      "image": "./assets/images/project-coastal-retreat.jpg",
+      "badge": "ĐẤT NỀN HÒA TIẾN",
+      "title": "ĐỒNG XANH HÒA TIẾN",
+      "subtitle": "Với lợi thế giao thông thuận tiện, khu dân cư hiện hữu và môi trường sống trong lành, đây là vị trí phù hợp để xây dựng nhà ở, nhà vườn nghỉ dưỡng hoặc tích lũy tài sản lâu dài.",
+      "image": "./assets/uploads/hero-slide-phong-canh-duong-pho-duoi-troi-xanh-mwndz5xi.webp",
       "ctaPrimaryText": "Trải nghiệm kỳ nghỉ thượng lưu",
-      "projectSlug": "solaris-ocean-retreat",
+      "projectSlug": "dat-nen-dong-xanh-hoa-tien",
       "highlightMetric": "Cam kết chia sẻ 85% lợi nhuận vận hành"
-    },
-    {
-      "id": "slide-1795080947166",
-      "badge": "DỰ ÁN MỚI RA MẮT",
-      "title": "looooooo",
-      "subtitle": "Tuyệt tác căn hộ xanh kiến trúc hữu cơ giữa lòng đô thị",
-      "image": "./assets/images/hero-emerald-residences.jpg",
-      "ctaPrimaryText": "Khám phá ngay",
-      "projectSlug": "looooooo",
-      "highlightMetric": "Ưu đãi mở bán đợt 1"
     }
   ],
   "stats": [
     {
-      "value": "22+",
-      "label": "Năm Kiến Tạo Di Sản",
+      "value": "10+",
+      "label": "Năm Kinh Nghiệm",
       "note": "Thương hiệu phát triển BĐS uy tín hàng đầu phía Nam"
     },
     {
       "value": "16+",
-      "label": "Dự Án Biểu Tượng",
+      "label": "Dự án triển khai",
       "note": "Căn hộ sinh thái, khu đô thị xanh & nghỉ dưỡng biển"
     },
     {
-      "value": "14.500+",
-      "label": "Tổ Ấm Trao Tay",
-      "note": "Cộng đồng cư dân tinh hoa, văn minh và gắn kết"
+      "value": "100+",
+      "label": "Sản phẩm bán ra",
+      "note": ""
     },
     {
-      "value": "99%",
+      "value": "100%",
       "label": "Pháp Lý Minh Bạch",
-      "note": "Bảo lãnh bởi các ngân hàng thương mại hàng đầu"
+      "note": ""
     }
   ],
   "values": [
@@ -118,191 +88,42 @@
   ],
   "projects": [
     {
-      "id": "proj-1794986551320",
-      "slug": "looooooo",
-      "name": "looooooo",
-      "category": "Căn hộ hạng sang",
-      "status": "Đang mở bán",
-      "featured": true,
-      "tagline": "Tuyệt tác căn hộ xanh kiến trúc hữu cơ giữa lòng đô thị",
-      "priceDisplay": "Từ 65 triệu/m²",
-      "numericPriceBillion": 5.2,
-      "areaRange": "55m² – 145m² (1PN – 3PN & Penthouse)",
-      "locationShort": "TP. Hồ Chí Minh",
-      "address": "Trung tâm Khu đô thị mới, TP. Hồ Chí Minh",
-      "heroImage": "./assets/images/hero-emerald-residences.jpg",
-      "summary": "looooooo được kiến tạo theo chuẩn mực sinh thái hiện đại, hài hòa giữa kiến trúc tinh tế, tiện ích nội khu đồng bộ và tiềm năng gia tăng giá trị bền vững.",
-      "highlights": [
-        "Mật độ xây dựng thấp dưới 28%, ưu tiên mảng xanh & mặt nước",
-        "Ban công kính cong Panorama đón gió và ánh sáng tự nhiên",
-        "Thanh toán chỉ 20% đến khi nhận bàn giao căn hộ",
-        "Pháp lý minh bạch — Sổ hồng sở hữu lâu dài"
-      ],
-      "specs": [
-        {
-          "label": "Chủ đầu tư",
-          "value": "Hưng Lộc Phát Luxury"
-        },
-        {
-          "label": "Tổng diện tích",
-          "value": "3,8 ha"
-        },
-        {
-          "label": "Mật độ xây dựng",
-          "value": "27,5%"
-        },
-        {
-          "label": "Quy mô",
-          "value": "2 Tháp cao 32 tầng • 680 căn hộ cao cấp"
-        },
-        {
-          "label": "Tiêu chuẩn bàn giao",
-          "value": "Nội thất liền tường cao cấp Châu Âu"
-        },
-        {
-          "label": "Pháp lý",
-          "value": "Sổ hồng sở hữu lâu dài"
-        },
-        {
-          "label": "Dự kiến bàn giao",
-          "value": "Quý IV / 2027"
-        }
-      ],
-      "location": {
-        "description": "Tọa lạc tại tâm điểm kết nối giao thông huyết mạch, từ looooooo cư dân thuận tiện tiếp cận chuỗi tiện ích thương mại, trường học và bệnh viện quốc tế.",
-        "mapQuery": "Ho Chi Minh City",
-        "mapEmbedUrl": "",
-        "connections": [
-          {
-            "time": "05 phút",
-            "place": "Trung tâm thương mại & Trường quốc tế",
-            "detail": "Tiện ích hiện hữu liền kề"
-          },
-          {
-            "time": "12 phút",
-            "place": "Trung tâm tài chính hành chính",
-            "detail": "Đại lộ kết nối thông suốt"
-          }
-        ]
-      },
-      "amenities": [
-        {
-          "icon": "waves",
-          "title": "Hồ Bơi Khoáng Muối Vô Cực",
-          "desc": "Công nghệ điện phân muối tự nhiên an toàn cho sức khỏe, tích hợp ghế thư giãn chìm Sunken Lounge.",
-          "image": ""
-        },
-        {
-          "icon": "trees",
-          "title": "Công Viên Ven Sông & Đường Dạo Bộ",
-          "desc": "Không gian sinh thái rợp bóng cây cổ thụ, thảm cỏ dã ngoại và đường chạy bộ lát đá tự nhiên.",
-          "image": ""
-        },
-        {
-          "icon": "sparkles",
-          "title": "Sky Lounge & Vườn Thượng Uyển Chân Mây",
-          "desc": "Thưởng ngoạn toàn cảnh thành phố 360 độ từ tầng thượng cùng quầy rượu vang tinh tế.",
-          "image": ""
-        },
-        {
-          "icon": "heart",
-          "title": "Tổ Hợp Onsen Khoáng Nóng & Wellness Spa",
-          "desc": "Chăm sóc và phục hồi năng lượng chuyên sâu chuẩn Nhật Bản dành riêng cho cư dân.",
-          "image": ""
-        }
-      ],
-      "floorPlans": [
-        {
-          "id": "fp-1794986551320",
-          "title": "Mặt Bằng Tổng Thể",
-          "area": "Quy hoạch đồng bộ",
-          "specs": "55m² – 145m² (1PN – 3PN & Penthouse)",
-          "image": "./assets/images/floorplan-master.svg"
-        }
-      ],
-      "policies": {
-        "bankSupport": "Ngân hàng đối tác bảo lãnh & hỗ trợ vay 70%, lãi suất 0% trong 24 tháng.",
-        "discountNote": "Chiết khấu thanh toán sớm hấp dẫn dành cho khách hàng đăng ký đợt đầu.",
-        "milestones": [
-          {
-            "step": "Đợt 1",
-            "title": "Ký Hợp đồng mua bán",
-            "percent": "15%",
-            "note": "Ngay khi ký HĐMB"
-          },
-          {
-            "step": "Đợt 2",
-            "title": "Thanh toán giãn cách theo tháng",
-            "percent": "5%",
-            "note": "Nhẹ nhàng dòng tiền"
-          },
-          {
-            "step": "Đợt 3",
-            "title": "Nhận bàn giao căn hộ",
-            "percent": "75%",
-            "note": "Ngân hàng hỗ trợ lãi suất 0%"
-          },
-          {
-            "step": "Đợt 4",
-            "title": "Nhận Sổ hồng",
-            "percent": "5%",
-            "note": "Sở hữu lâu dài"
-          }
-        ]
-      },
-      "gallery": [
-        {
-          "url": "./assets/images/hero-emerald-residences.jpg",
-          "caption": "Phối cảnh tổng thể looooooo"
-        }
-      ],
-      "videoUrl": ""
-    },
-    {
       "id": "proj-1",
-      "slug": "the-emerald-crown-quan-7",
-      "name": "The Emerald Crown Nam Sài Gòn",
-      "category": "Căn hộ hạng sang",
+      "slug": "dat-nen-dong-xanh-hoa-tien",
+      "name": "Đất nền Đồng Xanh - Hòa Tiến",
+      "category": "Đất nền & Shophouse",
       "status": "Đang mở bán",
       "featured": true,
-      "tagline": "Tuyệt tác căn hộ vườn chân mây bên dòng sông Sài Gòn",
-      "priceDisplay": "Từ 68 triệu/m²",
-      "numericPriceBillion": 5.6,
-      "areaRange": "58m² – 185m² (1–3PN & Sky Villa)",
-      "locationShort": "Phú Mỹ Hưng, Quận 7, TP.HCM",
-      "address": "Mặt tiền Đại lộ Nguyễn Lương Bằng nối dài, Phường Phú Mỹ, Quận 7, TP. Hồ Chí Minh",
-      "heroImage": "./assets/images/hero-emerald-residences.jpg",
-      "summary": "The Emerald Crown là biểu tượng kiến trúc sinh thái thế hệ mới tại tâm điểm khu Nam Sài Gòn. Hai tòa tháp uốn lượn mềm mại như dải lụa ngọc lục bảo vươn mình bên bờ sông rộng 800m, nơi mỗi ban công là một khu vườn nhiệt đới riêng tư giữa lưng chừng trời.",
+      "tagline": "Đồng Xanh Hòa Tiến – Đất lành an cư, giá trị bền vững",
+      "priceDisplay": "Từ 9 triệu/m²",
+      "numericPriceBillion": 1.1,
+      "areaRange": "120m2",
+      "locationShort": "Xã Hòa Tiến - Tp Đà Nẵng",
+      "address": "Thôn 5 xã Hòa Tiến - Tp Đà Nẵng",
+      "heroImage": "./assets/uploads/dat-nen-dong-xanh-hoa-tien-datnendongxanh-mwnd4wh8.webp",
+      "summary": "Tọa lạc tại khu vực Hòa Tiến, gần khu sinh thái Đồng Xanh – Đồng Nghệ, đất nền Đồng Xanh mang đến không gian sống trong lành, yên bình và gần gũi thiên nhiên.",
       "highlights": [
-        "Mật độ xây dựng chỉ 26.8% — hơn 73% dành cho cây xanh & mặt nước",
-        "Hồ bơi khoáng muối sinh học tràn bờ 1.200m² chuẩn Resort",
-        "Thanh toán nhẹ nhàng 20% đến khi nhận bàn giao nhà",
-        "Bàn giao nội thất liền tường Châu Âu & kính Low-E 3 lớp cách âm"
+        "Diện tích 120m²/lô",
+        "Đất ở 100%, sẵn sổ",
+        "Mặt tiền DH8 rộng 10,5m",
+        "Phù hợp An Cư và Tích Lũy tài sản"
       ],
       "specs": [
         {
           "label": "Chủ đầu tư",
-          "value": "Tập đoàn Hưng Lộc Phát Luxury"
+          "value": "Công ty TechNam Land"
         },
         {
           "label": "Vị trí",
-          "value": "Đại lộ Nguyễn Lương Bằng, Quận 7, TP.HCM"
+          "value": "Xã Hòa Tiến - Tp Đà Nẵng"
         },
         {
-          "label": "Tổng diện tích quy hoạch",
-          "value": "5,28 ha ven sông cảnh quan"
+          "label": "Quỹ lô",
+          "value": "84 lô"
         },
         {
-          "label": "Mật độ xây dựng",
-          "value": "26,8% (Khối tháp)"
-        },
-        {
-          "label": "Quy mô",
-          "value": "2 Tháp đôi cao 35 tầng • 840 căn hộ & 24 biệt thự ven sông"
-        },
-        {
-          "label": "Đơn vị thiết kế kiến trúc",
-          "value": "Ong & Ong (Singapore)"
+          "label": "Diện tích",
+          "value": "120m2 - 133m2"
         },
         {
           "label": "Quản lý vận hành",
@@ -310,39 +131,14 @@
         },
         {
           "label": "Pháp lý",
-          "value": "Sổ hồng sở hữu lâu dài (Người Việt Nam)"
-        },
-        {
-          "label": "Dự kiến bàn giao",
-          "value": "Quý II / 2028"
+          "value": "Sổ hồng lâu dài"
         }
       ],
       "location": {
-        "description": "Tọa lạc trên trục đại lộ thương mại tài chính Nguyễn Lương Bằng rộng 48m, liền kề khu đô thị kiểu mẫu Phú Mỹ Hưng. Từ dự án, cư dân dễ dàng kết nối chuỗi trường quốc tế, bệnh viện chuẩn quốc tế và trung tâm Quận 1 chỉ trong vài phút di chuyển.",
-        "mapQuery": "Nguyen Luong Bang, Quan 7, Ho Chi Minh",
-        "mapEmbedUrl": "",
-        "connections": [
-          {
-            "time": "03 phút",
-            "place": "Khu đô thị Phú Mỹ Hưng",
-            "detail": "Crescent Mall, Hồ Bán Nguyệt, Cầu Ánh Sao"
-          },
-          {
-            "time": "05 phút",
-            "place": "Hệ thống Trường Quốc tế",
-            "detail": "SSIS, RMIT, Đinh Thiện Lý, Canada (CIS)"
-          },
-          {
-            "time": "07 phút",
-            "place": "Bệnh viện FV & Tâm Đức",
-            "detail": "Chăm sóc y tế tiêu chuẩn Pháp quốc tế"
-          },
-          {
-            "time": "15 phút",
-            "place": "Trung tâm Quận 1 & Thủ Thiêm",
-            "detail": "Kết nối nhanh qua trục Nguyễn Văn Linh – Cầu Thủ Thiêm 4"
-          }
-        ]
+        "description": "Tọa lạc tại khu vực Hòa Tiến, TP. Đà Nẵng, đất nền Đồng Xanh sở hữu vị trí gần tuyến đường ĐH8 rộng 10,5m, thuận tiện kết nối với các khu dân cư và tiện ích lân cận. Đặc biệt, khu đất nằm gần khu sinh thái Đồng Xanh – Đồng Nghệ, được bao quanh bởi không gian thiên nhiên xanh mát, yên bình.",
+        "mapQuery": "Đất Nền Đồng Xanh",
+        "mapEmbedUrl": "https://maps.app.goo.gl/Wpxon7oyHTPr8ZsM9",
+        "connections": []
       },
       "amenities": [
         {
