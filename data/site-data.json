@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updatedAt": "2026-11-20T02:22:50.644Z",
-    "version": 3,
+    "updatedAt": "2026-11-20T04:14:13.327Z",
+    "version": 4,
     "repoOwner": "wuangtx",
     "repoName": "BDS"
   },
@@ -21,11 +21,11 @@
   },
   "theme": {
     "preset": "emerald-champagne",
-    "primary": "#ff0000",
-    "primarySoft": "#ff0000",
-    "accent": "#f7eacf",
+    "primary": "#0E3A2F",
+    "primarySoft": "#175445",
+    "accent": "#C8A45D",
     "accentSoft": "#E6C987",
-    "surface": "#faf8f4",
+    "surface": "#FAF8F4",
     "surfaceAlt": "#F2EDE3",
     "radiusStyle": "classic",
     "fontStyle": "modern"
